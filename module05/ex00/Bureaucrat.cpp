@@ -6,7 +6,7 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 10:06:25 by plang             #+#    #+#             */
-/*   Updated: 2024/10/23 14:47:44 by plang            ###   ########.fr       */
+/*   Updated: 2024/10/23 17:09:56 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ Bureaucrat::Bureaucrat() : name("random")
 
 Bureaucrat::Bureaucrat(std::string _name, int _grade) : name(_name), grade(_grade)
 {
-
+	
 }
 
 Bureaucrat::Bureaucrat(const Bureaucrat &other)
@@ -62,3 +62,12 @@ std::ostream& operator<<(std::ostream &out, Bureaucrat &obj)
 	return out << obj.getName() << ", bureaucrat grade " << obj.getName();
 }
 
+const char* Bureaucrat::GradeTooHighException::what() const noexcept
+{
+
+}
+
+const char* Bureaucrat::GradeTooLowException::what() const noexcept
+{
+	
+}

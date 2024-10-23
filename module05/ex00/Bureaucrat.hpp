@@ -6,7 +6,7 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 10:06:43 by plang             #+#    #+#             */
-/*   Updated: 2024/10/23 15:46:39 by plang            ###   ########.fr       */
+/*   Updated: 2024/10/23 17:08:08 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,13 @@ class Bureaucrat
 	class GradeTooHighException : public std::exception
 	{
 		public:
-
+			const char* what() const noexcept;
 	};
 
 	class GradeTooLowException : public std::exception
 	{
 		public:
-			
+			const char* what() const noexcept;
 	};
 };
 
