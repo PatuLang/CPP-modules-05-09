@@ -6,7 +6,7 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 14:45:10 by plang             #+#    #+#             */
-/*   Updated: 2024/10/24 16:56:01 by plang            ###   ########.fr       */
+/*   Updated: 2024/10/25 11:33:14 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define FORM_HPP
 
 # include <iostream>
-# include "Bureaucrat.hpp"
 
 class Bureaucrat;
 
@@ -32,12 +31,11 @@ class Form
 		Form& operator=(const Form&);
 		~Form();
 		
-		std::string	getName();
-		bool		getIsSigned();
-		int			getGradeToSign();
-		int			getGradeToExecute();
-		void		beSigned(Bureaucrat&);
-		void		signForm(Bureaucrat&);
+		std::string	getName() const;
+		bool		getIsSigned() const;
+		int			getGradeToSign() const;
+		int			getGradeToExecute() const;
+		void		beSigned(const Bureaucrat&);
 
 	class GradeTooHighException : public std::exception
 	{

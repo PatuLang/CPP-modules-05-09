@@ -6,11 +6,12 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 10:06:25 by plang             #+#    #+#             */
-/*   Updated: 2024/10/24 16:24:28 by plang            ###   ########.fr       */
+/*   Updated: 2024/10/25 11:33:50 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
+#include "Form.hpp"
 
 Bureaucrat::Bureaucrat() : name("random")
 {
@@ -44,12 +45,12 @@ Bureaucrat::~Bureaucrat()
 {
 }
 
-std::string	Bureaucrat::getName()
+std::string	Bureaucrat::getName() const
 {
 	return name;
 }
 
-int	Bureaucrat::getGrade()
+int	Bureaucrat::getGrade() const
 {
 	return grade;
 }
@@ -70,6 +71,14 @@ void	Bureaucrat::incrementGrade()
 		throw GradeTooHighException();
 	else
 		grade += 1;
+}
+
+void	Bureaucrat::signForm(const Form &_form)
+{
+	if (_form.getIsSigned() == true)
+		std::cout << getName() << " signed " << _form.getName() << "\n";
+	else
+		std::cout << getName() << " couln't sign " << _form.getName() << " because the it isn't signed!" << "\n";
 }
 
 std::ostream& operator<<(std::ostream &out, Bureaucrat &obj)

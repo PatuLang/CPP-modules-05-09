@@ -6,7 +6,7 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 10:06:43 by plang             #+#    #+#             */
-/*   Updated: 2024/10/24 14:11:13 by plang            ###   ########.fr       */
+/*   Updated: 2024/10/25 11:33:43 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define BUREAUCRAT_HPP
 
 # include <iostream>
+
+class Form;
 
 class Bureaucrat
 {
@@ -27,10 +29,11 @@ class Bureaucrat
 		Bureaucrat& operator=(const Bureaucrat&);
 		~Bureaucrat();
 		
-		std::string	getName();
-		int			getGrade();
+		std::string	getName() const;
+		int			getGrade() const;
 		void		decrementGrade();
 		void		incrementGrade();
+		void		signForm(const Form&);
 	
 	class GradeTooHighException : public std::exception
 	{

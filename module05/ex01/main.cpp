@@ -6,11 +6,12 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 10:05:40 by plang             #+#    #+#             */
-/*   Updated: 2024/10/24 18:20:38 by plang            ###   ########.fr       */
+/*   Updated: 2024/10/25 11:19:16 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Form.hpp"
+#include "Bureaucrat.hpp"
 
 int	main(void)
 {
@@ -24,9 +25,9 @@ int	main(void)
 		Form	FPA("studentBenefits", 1, 1);
 		std::cout << FPA << "\n";
 		FPA.beSigned(bob);
-		FPA.signForm(bob);
+		bob.signForm(FPA);
 		FPA.beSigned(jac);
-		FPA.signForm(jac);
+		jac.signForm(FPA);
 	}
 	catch(const std::exception& e)
 	{
