@@ -6,7 +6,7 @@
 #    By: plang <plang@student.hive.fi>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/24 14:44:21 by plang             #+#    #+#              #
-#    Updated: 2024/10/28 10:12:52 by plang            ###   ########.fr        #
+#    Updated: 2024/10/28 17:34:08 by plang            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,8 @@ SRCS = main.cpp \
 		AForm.cpp \
 		ShrubberyCreationForm.cpp \
 		RobotomyRequestForm.cpp \
-		PresidentialPardonForm.cpp
+		PresidentialPardonForm.cpp \
+		Intern.cpp
 
 OBJS =	$(SRCS:.cpp=.o)
 
