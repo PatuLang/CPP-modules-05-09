@@ -6,7 +6,7 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 10:06:43 by plang             #+#    #+#             */
-/*   Updated: 2024/10/25 11:33:43 by plang            ###   ########.fr       */
+/*   Updated: 2024/10/28 10:36:51 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ class Bureaucrat
 		int			getGrade() const;
 		void		decrementGrade();
 		void		incrementGrade();
-		void		signForm(const Form&);
+		void		signForm(Form&);
 	
 	class GradeTooHighException : public std::exception
 	{

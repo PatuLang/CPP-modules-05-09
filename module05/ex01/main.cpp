@@ -6,7 +6,7 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 10:05:40 by plang             #+#    #+#             */
-/*   Updated: 2024/10/25 11:19:16 by plang            ###   ########.fr       */
+/*   Updated: 2024/10/28 10:37:11 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,7 @@ int	main(void)
 
 		Form	FPA("studentBenefits", 1, 1);
 		std::cout << FPA << "\n";
-		FPA.beSigned(bob);
 		bob.signForm(FPA);
-		FPA.beSigned(jac);
 		jac.signForm(FPA);
 	}
 	catch(const std::exception& e)

@@ -6,7 +6,7 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 10:06:25 by plang             #+#    #+#             */
-/*   Updated: 2024/10/25 11:33:50 by plang            ###   ########.fr       */
+/*   Updated: 2024/10/28 10:37:00 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,9 @@ void	Bureaucrat::incrementGrade()
 		grade += 1;
 }
 
-void	Bureaucrat::signForm(const Form &_form)
+void	Bureaucrat::signForm(Form &_form)
 {
+	_form.beSigned(*this);
 	if (_form.getIsSigned() == true)
 		std::cout << getName() << " signed " << _form.getName() << "\n";
 	else
