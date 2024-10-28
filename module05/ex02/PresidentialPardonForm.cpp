@@ -6,7 +6,7 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 11:24:34 by plang             #+#    #+#             */
-/*   Updated: 2024/10/25 16:47:42 by plang            ###   ########.fr       */
+/*   Updated: 2024/10/28 10:54:38 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ void	PresidentialPardonForm::execute(Bureaucrat const &executor) const
 {
 	if (getIsSigned() == false)
 		throw FormNotSignedException();
-	if (getGradeToExecute() > executor.getGrade())
+	if (getGradeToExecute() < (executor.getGrade()))
 		throw GradeTooLowException();
+	std::cout << target << " has been pardoned by Zaphod Beeblebrox\n";
 }
 	

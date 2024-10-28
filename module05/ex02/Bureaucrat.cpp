@@ -6,7 +6,7 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 10:06:25 by plang             #+#    #+#             */
-/*   Updated: 2024/10/25 16:34:38 by plang            ###   ########.fr       */
+/*   Updated: 2024/10/28 10:35:13 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,9 @@ void	Bureaucrat::incrementGrade()
 		grade += 1;
 }
 
-void	Bureaucrat::signForm(const AForm &_form)
+void	Bureaucrat::signForm(AForm &_form)
 {
+	_form.beSigned(*this);
 	if (_form.getIsSigned() == true)
 		std::cout << getName() << " signed " << _form.getName() << "\n";
 	else
@@ -84,6 +85,7 @@ void	Bureaucrat::signForm(const AForm &_form)
 void	Bureaucrat::executeForm(AForm const &form)
 {
 	form.execute(*this);
+	std::cout << getName() << " executed " << form.getName() << "\n";
 }
 
 std::ostream& operator<<(std::ostream &out, Bureaucrat &obj)

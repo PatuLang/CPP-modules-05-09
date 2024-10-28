@@ -14,6 +14,8 @@
 # define AFORM_HPP
 
 # include <iostream>
+# include <stdexcept>
+# include <exception>
 
 class Bureaucrat;
 

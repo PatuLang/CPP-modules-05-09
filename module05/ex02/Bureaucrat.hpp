@@ -6,7 +6,7 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 10:06:43 by plang             #+#    #+#             */
-/*   Updated: 2024/10/25 16:23:57 by plang            ###   ########.fr       */
+/*   Updated: 2024/10/28 14:53:10 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define BUREAUCRAT_HPP
 
 # include <iostream>
+# include <stdexcept>
+# include <exception>
 
 class AForm;
 
@@ -33,7 +35,7 @@ class Bureaucrat
 		int			getGrade() const;
 		void		decrementGrade();
 		void		incrementGrade();
-		void		signForm(const AForm&);
+		void		signForm(AForm&);
 		void		executeForm(AForm const & form);
 	
 	class GradeTooHighException : public std::exception

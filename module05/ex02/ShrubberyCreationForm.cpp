@@ -6,12 +6,13 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 11:24:46 by plang             #+#    #+#             */
-/*   Updated: 2024/10/25 16:46:41 by plang            ###   ########.fr       */
+/*   Updated: 2024/10/28 14:51:09 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ShrubberyCreationForm.hpp"
 #include "Bureaucrat.hpp"
+#include <fstream>
 
 ShrubberyCreationForm::ShrubberyCreationForm() : AForm("ShrubberyCreation", 145, 137)
 {
@@ -41,7 +42,17 @@ void	ShrubberyCreationForm::execute(Bureaucrat const &executor) const
 {
 	if (getIsSigned() == false)
 		throw FormNotSignedException();
-	if (getGradeToExecute() > executor.getGrade())
+	if (getGradeToExecute() < (executor.getGrade()))
 		throw GradeTooLowException();
+	std::ofstream outFile(target + "_shrubbery");
+	if (outFile.fail() == true)
+		throw std::runtime_error("File could not be opened");
+	outFile << "    ####    \n";
+	for (int i = 0; i < 4; i++)
+		outFile << "  ########  \n";
+	outFile << "    ####    \n";
+	for (int i = 0; i < 4; i++)
+	outFile << "     ||     \n";
+	outFile << "     /\\    \n";
+	outFile.close();
 }
-
