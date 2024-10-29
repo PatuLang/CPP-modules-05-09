@@ -6,22 +6,17 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 12:23:48 by plang             #+#    #+#             */
-/*   Updated: 2024/10/29 12:28:37 by plang            ###   ########.fr       */
+/*   Updated: 2024/10/29 14:34:37 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ScalarConverter.hpp"
 
-int	main(void)
+int	main(int argc, char **argv)
 {
-	try
+	if (argc == 2)
 	{
-		
+		ScalarConverter::convert(argv[1]);
 	}
-	catch(const std::exception& e)
-	{
-		std::cerr << e.what() << '\n';
-	}
-	
 	return 0;
 }
