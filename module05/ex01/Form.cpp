@@ -6,7 +6,7 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 14:45:07 by plang             #+#    #+#             */
-/*   Updated: 2024/10/25 11:33:27 by plang            ###   ########.fr       */
+/*   Updated: 2024/10/29 11:49:35 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,26 +21,26 @@ Form::Form(std::string _name, int _gradeToSign, int _gradeToExecute) : name(_nam
 {
 	isSigned = false;
 	if (gradeToSign > 150)
-		throw GradeTooHighException();
+		throw GradeTooLowException();
 	if (gradeToSign < 1)
-		throw GradeTooLowException();
-	if (gradeToExecute > 150)
 		throw GradeTooHighException();
-	if (gradeToExecute < 1)
+	if (gradeToExecute > 150)
 		throw GradeTooLowException();
+	if (gradeToExecute < 1)
+		throw GradeTooHighException();
 }
 
 Form::Form(const Form &other) : name(other.name), gradeToSign(other.gradeToSign), gradeToExecute(other.gradeToExecute)
 {
 	isSigned = false;
 	if (gradeToSign > 150)
-		throw GradeTooHighException();
+		throw GradeTooLowException();
 	if (gradeToSign < 1)
-		throw GradeTooLowException();
-	if (gradeToExecute > 150)
 		throw GradeTooHighException();
-	if (gradeToExecute < 1)
+	if (gradeToExecute > 150)
 		throw GradeTooLowException();
+	if (gradeToExecute < 1)
+		throw GradeTooHighException();
 }
 
 Form&   Form::operator=(const Form &other)
@@ -79,7 +79,7 @@ void	Form::beSigned(const Bureaucrat &requester)
 	if (requester.getGrade() <= gradeToSign)
 		isSigned = true;
 	else
-		throw GradeTooHighException();
+		throw GradeTooLowException();
 }
 
 std::ostream& operator<<(std::ostream &out, Form &obj)

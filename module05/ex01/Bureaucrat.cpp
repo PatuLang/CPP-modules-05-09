@@ -6,7 +6,7 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 10:06:25 by plang             #+#    #+#             */
-/*   Updated: 2024/10/28 10:37:00 by plang            ###   ########.fr       */
+/*   Updated: 2024/10/29 11:46:53 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,17 @@ Bureaucrat::Bureaucrat() : name("random")
 Bureaucrat::Bureaucrat(std::string _name, int _grade) : name(_name), grade(_grade)
 {
 	if (grade > 150)
-		throw GradeTooHighException();
-	if (grade < 1)
 		throw GradeTooLowException();
+	if (grade < 1)
+		throw GradeTooHighException();
 }
 
 Bureaucrat::Bureaucrat(const Bureaucrat &other) : name(other.name), grade(other.grade)
 {
 	if (grade > 150)
-		throw GradeTooHighException();
-	if (grade < 1)
 		throw GradeTooLowException();
+	if (grade < 1)
+		throw GradeTooHighException();
 }
 
 Bureaucrat&   Bureaucrat::operator=(const Bureaucrat &other)
@@ -55,20 +55,20 @@ int	Bureaucrat::getGrade() const
 	return grade;
 }
 
-void	Bureaucrat::decrementGrade()
+void	Bureaucrat::incrementGrade()
 {
 	int	upgrade = grade - 1;
 	if (upgrade < 1)
-		throw GradeTooLowException();
+		throw GradeTooHighException();
 	else
 		grade -= 1;
 }
 
-void	Bureaucrat::incrementGrade()
+void	Bureaucrat::decrementGrade()
 {
 	int	upgrade = grade + 1;
 	if (upgrade > 150)
-		throw GradeTooHighException();
+		throw GradeTooLowException();
 	else
 		grade += 1;
 }

@@ -21,26 +21,26 @@ AForm::AForm(std::string _name, int _gradeToSign, int _gradeToExecute) : name(_n
 {
 	isSigned = false;
 	if (gradeToSign > 150)
-		throw GradeTooHighException();
+		throw GradeTooLowException();
 	if (gradeToSign < 1)
-		throw GradeTooLowException();
-	if (gradeToExecute > 150)
 		throw GradeTooHighException();
-	if (gradeToExecute < 1)
+	if (gradeToExecute > 150)
 		throw GradeTooLowException();
+	if (gradeToExecute < 1)
+		throw GradeTooHighException();
 }
 
 AForm::AForm(const AForm &other) : name(other.name), gradeToSign(other.gradeToSign), gradeToExecute(other.gradeToExecute)
 {
 	isSigned = false;
 	if (gradeToSign > 150)
-		throw GradeTooHighException();
+		throw GradeTooLowException();
 	if (gradeToSign < 1)
-		throw GradeTooLowException();
-	if (gradeToExecute > 150)
 		throw GradeTooHighException();
-	if (gradeToExecute < 1)
+	if (gradeToExecute > 150)
 		throw GradeTooLowException();
+	if (gradeToExecute < 1)
+		throw GradeTooHighException();
 }
 
 AForm&   AForm::operator=(const AForm &other)
@@ -79,7 +79,7 @@ void	AForm::beSigned(const Bureaucrat &requester)
 	if (requester.getGrade() <= gradeToSign)
 		isSigned = true;
 	else
-		throw GradeTooHighException();
+		throw GradeTooLowException();
 }
 
 void	AForm::execute(Bureaucrat const &executor) const
