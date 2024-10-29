@@ -6,7 +6,7 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 10:05:40 by plang             #+#    #+#             */
-/*   Updated: 2024/10/28 15:01:30 by plang            ###   ########.fr       */
+/*   Updated: 2024/10/29 09:32:21 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	main(void)
 	try
 	{
 		Bureaucrat Bob("Bob", 1);
-		Bureaucrat Tom("Tom", 2);
+		Bureaucrat Tom("Tom", 25);
 		Bureaucrat Dom(Tom);
 		std::cout << Dom << '\n';
 		PresidentialPardonForm one("Sauli");
