@@ -6,7 +6,7 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 12:23:51 by plang             #+#    #+#             */
-/*   Updated: 2024/10/30 15:15:03 by plang            ###   ########.fr       */
+/*   Updated: 2024/11/01 14:08:27 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,23 @@ ScalarConverter::~ScalarConverter()
 
 bool	isOnlyNumbers(std::string input)
 {
-	for(char c: input)
+	for (unsigned long i = 0; i < input.size(); i++)
 	{
-		if (!std::isdigit(c))
+		if ((input[0] == '-' || input[0] == '+') && (input.back() != '-' || input.back() != '+')  && i == 0)
+			i++;
+		if (!std::isdigit(static_cast<unsigned char>(input[i])))
+			return false;
+	}
+	return true;
+}
+
+bool	isOnlyF(std::string input)
+{
+	for (unsigned long i = 0; i < input.size(); i++)
+	{
+		if ((input[0] == '-' || input[0] == '+') && (input.back() != '-' || input.back() != '+') && i == 0)
+			i++;
+		if (!std::isdigit(static_cast<unsigned char>(input[i])) && input[i] != 'f' && input[i] != '.')
 			return false;
 	}
 	return true;
@@ -43,16 +57,19 @@ bool	isOnlyNumbers(std::string input)
 
 int	typeIdentifier(std::string input)
 {
-	std::cout << "Identifier\n";
 	if (input.empty())
 		return 5;
-	if (input[0] == '\'' && (std::isalpha(input[1]) || std::isprint(input[1])) && input[2] == '\'')
-		return 1;
-	else if (input.back() == 'f')
-		return 2;
-	else if (input.find('.') != std::string::npos)
+	if (input == "nan" || input == "-inf" || input == "+inf" || input == "inf")
 		return 3;
-	else if (((input[0] == '-' || input[0] == '+') && input.length() > 1) || isOnlyNumbers(input) == true)
+	if (input == "nanf" || input == "-inff" || input == "+inff" || input == "inff")
+		return 2;
+	if (input[0] == '\'' && (std::isalpha(static_cast<unsigned char>(input[1])) || std::isprint(static_cast<unsigned char>(input[1]))) && input[2] == '\'')
+		return 1;
+	else if (input.back() == 'f' && (input.size() - 1) == input.find('f') && input.rfind('f') == input.find('f') && isOnlyF(input) == true)
+		return 2;
+	else if (input.find('.') != std::string::npos && input.rfind('.') == input.find('.') && input.find('f') == std::string::npos)
+		return 3;
+	else if ((((input[0] == '-' || input[0] == '+') && input.length() > 1) && isOnlyNumbers(input) == true) || isOnlyNumbers(input) == true)
 		return 4;
 	else
 		return 5;
@@ -60,40 +77,79 @@ int	typeIdentifier(std::string input)
 
 void	isChar(std::string input)
 {
-	(void)input;
 	std::cout << "Char\n";
+	try
+	{
+		char	convertChar;
+		convertChar = static_cast<char>(input[1]);
+		std::cout << std::fixed << std::setprecision(1) << "char: '" << static_cast<char>(convertChar) << "'\n" << "int: " << static_cast<int>(convertChar) << "\n" << "float: " << static_cast<float>(convertChar) << "f\n" << "double: " << static_cast<double>(convertChar) << "\n";
+	}
+	catch(const std::invalid_argument& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
 }
 
 void	isInt(std::string input)
 {
-	(void)input;
 	std::cout << "Int\n";
+	try
+	{
+		int	convertInt;
+		convertInt = std::stoi(input);
+		if (std::isprint(static_cast<unsigned char>(convertInt)) == false)
+			std::cout << std::fixed << std::setprecision(1) << "char: Non displayable\n" << "int: " << static_cast<int>(convertInt) << "\n" << "float: " << static_cast<float>(convertInt) << "f\n" << "double: " << static_cast<double>(convertInt) << "\n";
+		else
+			std::cout << std::fixed << std::setprecision(1) << "char: '" << static_cast<char>(convertInt) << "'\n" << "int: " << static_cast<int>(convertInt) << "\n" << "float: " << static_cast<float>(convertInt) << "f\n" << "double: " << static_cast<double>(convertInt) << "\n";
+	}
+	catch(const std::invalid_argument& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
 }
 
 void	isFloat(std::string input)
 {
-	(void)input;
 	std::cout << "Float\n";
+	try
+	{
+		float	convertFloat;
+		convertFloat = std::stof(input);
+		if (input == "nanf" || input == "-inff" || input == "+inff" || input == "inff")
+			std::cout << std::fixed << "char: impossible\n"  << "int: impossible\n" << "float: " << static_cast<float>(convertFloat) << "f\n" << "double: " << static_cast<double>(convertFloat) << "\n";
+		else if (std::isprint(static_cast<unsigned char>(convertFloat)) == false)
+			std::cout << std::fixed << "char: Non displayable\n" << "int: " << static_cast<int>(convertFloat) << "\n" << "float: " << static_cast<float>(convertFloat) << "f\n" << "double: " << static_cast<double>(convertFloat) << "\n";
+		else
+			std::cout << std::fixed << "char: '" << static_cast<char>(convertFloat) << "'\n" << "int: " << static_cast<int>(convertFloat) << "\n" << "float: " << static_cast<float>(convertFloat) << "f\n" << "double: " << static_cast<double>(convertFloat) << "\n";
+	}
+	catch(const std::invalid_argument& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
 }
 
 void	isDouble(std::string input)
 {
-	(void)input;
 	std::cout << "Double\n";
+	try
+	{
+		double	convertDouble;
+		convertDouble = std::stod(input);
+		if (input == "nan" || input == "-inf" || input == "+inf" || input == "inf")
+			std::cout << std::fixed << "char: impossible\n"  << "int: impossible\n" << "float: " << static_cast<float>(convertDouble) << "f\n" << "double: " << static_cast<double>(convertDouble) << "\n";
+		else if (std::isprint(static_cast<unsigned char>(convertDouble)) == false)
+			std::cout << std::fixed << "char: Non displayable\n" << "int: " << static_cast<int>(convertDouble) << "\n" << "float: " << static_cast<float>(convertDouble) << "f\n" << "double: " << static_cast<double>(convertDouble) << "\n";
+		else
+			std::cout << std::fixed << "char: '" << static_cast<char>(convertDouble) << "'\n" << "int: " << static_cast<int>(convertDouble) << "\n" << "float: " << static_cast<float>(convertDouble) << "f\n" << "double: " << static_cast<double>(convertDouble) << "\n";
+	}
+	catch(const std::invalid_argument& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
 }
 
 void	ScalarConverter::convert(std::string input)
-{
-	// identify type - switch or turnery
-	// or just a checker for each specific traits of each types: ' ', . , f, +and- --> maybe more?
-
-	// try catch box for invalid arguments, no need for custom exceptions. Can just write ther right message in the catch box.
-
-	// static_cast<to_what_type>(from_object);
-
-	// multiple functions for each: char, int, float, double?
-	// one big 
-	
+{	
 	switch(typeIdentifier(input))
 	{
 		case 1:
@@ -123,42 +179,4 @@ void	ScalarConverter::convert(std::string input)
 		}
 	}
 }
-
-
-	// try
-	// {
-	// 	int	convertedInt;
-	// 	std::cout << "Trying string to int\n";
-	// 	convertedInt = std::stoi(input);
-	// 	std::cout << convertedInt << "\n";
-	// }
-	// catch(const std::invalid_argument& e)
-	// {
-	// 	std::cerr << "Impossible" << '\n';
-	// 	std::cerr << e.what() << '\n';
-	// }
-	// try
-	// {
-	// 	float	convertedFloat;
-	// 	std::cout << "Trying string to float\n";
-	// 	convertedFloat = std::stof(input);
-	// 	std::cout << std::fixed << std::setprecision(1);
-	// 	std::cout << convertedFloat << "f\n";
-	// }
-	// catch(const std::invalid_argument& e)
-	// {
-	// 	std::cerr << e.what() << '\n';
-	// }
-	// try
-	// {
-	// 	double	convertedDouble;
-	// 	std::cout << "Trying string to double\n";
-	// 	convertedDouble = std::stod(input);
-	// 	std::cout << std::fixed << std::setprecision(1);
-	// 	std::cout << convertedDouble << "\n";
-	// }
-	// catch(const std::invalid_argument& e)
-	// {
-	// 	std::cerr << e.what() << '\n';
-	// }
 	
