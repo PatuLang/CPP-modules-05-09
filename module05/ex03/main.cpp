@@ -6,7 +6,7 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 10:05:40 by plang             #+#    #+#             */
-/*   Updated: 2024/10/29 09:29:19 by plang            ###   ########.fr       */
+/*   Updated: 2024/10/31 14:46:47 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
 
 int	main(void)
 {
-	AForm* rrf;
-	AForm* ppf;
-	AForm* scf;
+	AForm* rrf = nullptr;
+	AForm* ppf = nullptr;
+	AForm* scf = nullptr;
 	// AForm* nothing;
 	try
 	{

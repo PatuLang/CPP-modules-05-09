@@ -6,7 +6,7 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 15:18:05 by plang             #+#    #+#             */
-/*   Updated: 2024/10/29 09:14:30 by plang            ###   ########.fr       */
+/*   Updated: 2024/10/31 14:46:15 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ Intern::~Intern()
 
 AForm*	Intern::makeForm(std::string formName, std::string formTarget)
 {
-	AForm *newForm;
+	AForm *newForm = nullptr;
 	std::string _forms[3] = {{"Robotomy request"}, {"Shrubbery creation"}, {"Presidential pardon"}};
 	for(int i = 0; i < 3; i++)
 	{
