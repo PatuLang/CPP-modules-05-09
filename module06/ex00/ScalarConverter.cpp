@@ -6,7 +6,7 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 12:23:51 by plang             #+#    #+#             */
-/*   Updated: 2024/11/01 14:08:27 by plang            ###   ########.fr       */
+/*   Updated: 2024/11/01 14:43:04 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,14 +93,18 @@ void	isChar(std::string input)
 void	isInt(std::string input)
 {
 	std::cout << "Int\n";
+	int	convertInt;
 	try
 	{
-		int	convertInt;
 		convertInt = std::stoi(input);
 		if (std::isprint(static_cast<unsigned char>(convertInt)) == false)
 			std::cout << std::fixed << std::setprecision(1) << "char: Non displayable\n" << "int: " << static_cast<int>(convertInt) << "\n" << "float: " << static_cast<float>(convertInt) << "f\n" << "double: " << static_cast<double>(convertInt) << "\n";
 		else
 			std::cout << std::fixed << std::setprecision(1) << "char: '" << static_cast<char>(convertInt) << "'\n" << "int: " << static_cast<int>(convertInt) << "\n" << "float: " << static_cast<float>(convertInt) << "f\n" << "double: " << static_cast<double>(convertInt) << "\n";
+	}
+	catch(const std::out_of_range& e)
+	{
+		std::cout << "char: Impossible\n" << "int: Impossible\n" << "float: Impossible\n" << "double: Impossible\n";
 	}
 	catch(const std::invalid_argument& e)
 	{
@@ -116,11 +120,15 @@ void	isFloat(std::string input)
 		float	convertFloat;
 		convertFloat = std::stof(input);
 		if (input == "nanf" || input == "-inff" || input == "+inff" || input == "inff")
-			std::cout << std::fixed << "char: impossible\n"  << "int: impossible\n" << "float: " << static_cast<float>(convertFloat) << "f\n" << "double: " << static_cast<double>(convertFloat) << "\n";
+			std::cout << std::fixed << "char: Impossible\n"  << "int: Impossible\n" << "float: " << static_cast<float>(convertFloat) << "f\n" << "double: " << static_cast<double>(convertFloat) << "\n";
 		else if (std::isprint(static_cast<unsigned char>(convertFloat)) == false)
 			std::cout << std::fixed << "char: Non displayable\n" << "int: " << static_cast<int>(convertFloat) << "\n" << "float: " << static_cast<float>(convertFloat) << "f\n" << "double: " << static_cast<double>(convertFloat) << "\n";
 		else
 			std::cout << std::fixed << "char: '" << static_cast<char>(convertFloat) << "'\n" << "int: " << static_cast<int>(convertFloat) << "\n" << "float: " << static_cast<float>(convertFloat) << "f\n" << "double: " << static_cast<double>(convertFloat) << "\n";
+	}
+	catch(const std::out_of_range& e)
+	{
+		// have to handle this correctly
 	}
 	catch(const std::invalid_argument& e)
 	{
@@ -136,11 +144,15 @@ void	isDouble(std::string input)
 		double	convertDouble;
 		convertDouble = std::stod(input);
 		if (input == "nan" || input == "-inf" || input == "+inf" || input == "inf")
-			std::cout << std::fixed << "char: impossible\n"  << "int: impossible\n" << "float: " << static_cast<float>(convertDouble) << "f\n" << "double: " << static_cast<double>(convertDouble) << "\n";
+			std::cout << std::fixed << "char: Impossible\n"  << "int: Impossible\n" << "float: " << static_cast<float>(convertDouble) << "f\n" << "double: " << static_cast<double>(convertDouble) << "\n";
 		else if (std::isprint(static_cast<unsigned char>(convertDouble)) == false)
 			std::cout << std::fixed << "char: Non displayable\n" << "int: " << static_cast<int>(convertDouble) << "\n" << "float: " << static_cast<float>(convertDouble) << "f\n" << "double: " << static_cast<double>(convertDouble) << "\n";
 		else
 			std::cout << std::fixed << "char: '" << static_cast<char>(convertDouble) << "'\n" << "int: " << static_cast<int>(convertDouble) << "\n" << "float: " << static_cast<float>(convertDouble) << "f\n" << "double: " << static_cast<double>(convertDouble) << "\n";
+	}
+	catch(const std::out_of_range& e)
+	{
+		// have to handle this correctly
 	}
 	catch(const std::invalid_argument& e)
 	{
