@@ -6,7 +6,7 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 12:23:53 by plang             #+#    #+#             */
-/*   Updated: 2024/11/01 13:45:36 by plang            ###   ########.fr       */
+/*   Updated: 2024/11/04 11:50:50 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <iostream>
 # include <string>
 # include <iomanip>
+# include <limits>
 
 class ScalarConverter
 {
