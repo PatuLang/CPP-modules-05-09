@@ -6,7 +6,7 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 12:23:51 by plang             #+#    #+#             */
-/*   Updated: 2024/11/06 12:13:41 by plang            ###   ########.fr       */
+/*   Updated: 2024/11/06 16:58:37 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,12 +82,25 @@ int	typeIdentifier(std::string input)
 		return 2;
 	if (input[0] == '\'' && (std::isalpha(static_cast<unsigned char>(input[1])) || std::isprint(static_cast<unsigned char>(input[1]))) && input[2] == '\'')
 		return 1;
-	else if (input.back() == 'f' && (input.size() - 1) == input.find('f') && input.rfind('f') == input.find('f') && isOnlyF(input) == true)
+	if (input[0] == '\"' && (std::isalpha(static_cast<unsigned char>(input[1])) || std::isprint(static_cast<unsigned char>(input[1]))) && input[2] == '\"')
+		return 1;
+	else if (input.back() == 'f' && (input.size() - 1) == input.find('f') && input.rfind('f') == input.find('f') && isOnlyF(input) == true && input[0] != 'f')
 		return 2;
 	else if (input.find('.') != std::string::npos && input.rfind('.') == input.find('.') && input.find('f') == std::string::npos && isOnlyDot(input) == true)
 		return 3;
 	else if ((((input[0] == '-' || input[0] == '+') && input.length() > 1) && isOnlyNumbers(input) == true) || isOnlyNumbers(input) == true)
+	{
+		try
+		{
+			int	convertInt;
+			convertInt = std::stoi(input);
+		}
+		catch(const std::exception& e)
+		{
+			return 5;
+		}
 		return 4;
+	}
 	else
 		return 5;
 }
@@ -99,7 +112,11 @@ void	isChar(std::string input)
 	{
 		char	convertChar;
 		convertChar = static_cast<char>(input[1]);
-		std::cout << std::fixed << std::setprecision(1) << "char: '" << static_cast<char>(convertChar) << "'\n" << "int: " << static_cast<int>(convertChar) << "\n" << "float: " << static_cast<float>(convertChar) << "f\n" << "double: " << static_cast<double>(convertChar) << "\n";
+		std::cout << std::fixed << std::setprecision(1) \
+		<< "char: '" << static_cast<char>(convertChar) << "'\n" \
+		<< "int: " << static_cast<int>(convertChar) << "\n" \
+		<< "float: " << static_cast<float>(convertChar) << "f\n" \
+		<< "double: " << static_cast<double>(convertChar) << "\n";
 	}
 	catch(const std::invalid_argument& e)
 	{
@@ -115,13 +132,25 @@ void	isInt(std::string input)
 	{
 		convertInt = std::stoi(input);
 		if (std::isprint(static_cast<unsigned char>(convertInt)) == false)
-			std::cout << std::fixed << std::setprecision(1) << "char: Non displayable\n" << "int: " << static_cast<int>(convertInt) << "\n" << "float: " << static_cast<float>(convertInt) << "f\n" << "double: " << static_cast<double>(convertInt) << "\n";
+			std::cout << std::fixed << std::setprecision(1) \
+			<< "char: Non displayable\n" \
+			<< "int: " << static_cast<int>(convertInt) << "\n" \
+			<< "float: " << static_cast<float>(convertInt) << "f\n" \
+			<< "double: " << static_cast<double>(convertInt) << "\n";
 		else
-			std::cout << std::fixed << std::setprecision(1) << "char: '" << static_cast<char>(convertInt) << "'\n" << "int: " << static_cast<int>(convertInt) << "\n" << "float: " << static_cast<float>(convertInt) << "f\n" << "double: " << static_cast<double>(convertInt) << "\n";
+			std::cout << std::fixed << std::setprecision(1) \
+			<< "char: '" << static_cast<char>(convertInt) << "'\n" \
+			<< "int: " << static_cast<int>(convertInt) << "\n" \
+			<< "float: " << static_cast<float>(convertInt) << "f\n" \
+			<< "double: " << static_cast<double>(convertInt) << "\n";
 	}
 	catch(const std::out_of_range& e)
 	{
-		std::cout << "char: Impossible\n" << "int: Impossible\n" << "float: Impossible\n" << "double: Impossible\n";
+		std::cout \
+		<< "char: Impossible\n" \
+		<< "int: Impossible\n" \
+		<< "float: Impossible\n" \
+		<< "double: Impossible\n";
 	}
 	catch(const std::invalid_argument& e)
 	{
@@ -137,16 +166,38 @@ void	isFloat(std::string input)
 		float	convertFloat;
 		convertFloat = std::stof(input);
 		if (input == "nanf" || input == "-inff" || input == "+inff" || input == "inff")
-			std::cout << std::fixed << "char: Impossible\n"  << "int: Impossible\n" << "float: " << static_cast<float>(convertFloat) << "f\n" << "double: " << static_cast<double>(convertFloat) << "\n";
-		else if (((convertFloat < 32 || convertFloat > 127) || std::isprint(static_cast<unsigned char>(convertFloat)) == false) && (convertFloat < static_cast<float>(std::numeric_limits<int>::min()) || convertFloat > static_cast<float>(std::numeric_limits<int>::max())))
-			std::cout << std::fixed << "char: Non displayable\n" << "int: Impossible\n" << "float: " << static_cast<float>(convertFloat) << "f\n" << "double: " << static_cast<double>(convertFloat) << "\n";
+			std::cout << std::fixed \
+			<< "char: Impossible\n" \
+			<< "int: Impossible\n" \
+			<< "float: " << static_cast<float>(convertFloat) << "f\n" \
+			<< "double: " << static_cast<double>(convertFloat) << "\n";
+		else if (((convertFloat < 32 || convertFloat > 127) || std::isprint(static_cast<unsigned char>(convertFloat)) == false) && \
+		(convertFloat < static_cast<double>(std::numeric_limits<int>::min()) || convertFloat > static_cast<double>(std::numeric_limits<int>::max())))
+			std::cout << std::fixed \
+			<< "char: Non displayable\n" \
+			<< "int: Impossible\n" \
+			<< "float: " << static_cast<float>(convertFloat) << "f\n" \
+			<< "double: " << static_cast<double>(convertFloat) << "\n";
 		else if ((convertFloat < 32 || convertFloat > 127) || std::isprint(static_cast<unsigned char>(convertFloat)) == false)
-			std::cout << std::fixed << "char: Non displayable\n" << "int: " << static_cast<int>(convertFloat) << "\n" << "float: " << static_cast<float>(convertFloat) << "f\n" << "double: " << static_cast<double>(convertFloat) << "\n";
+			std::cout << std::fixed \
+			<< "char: Non displayable\n" \
+			<< "int: " << static_cast<int>(convertFloat) << "\n" \
+			<< "float: " << static_cast<float>(convertFloat) << "f\n" \
+			<< "double: " << static_cast<double>(convertFloat) << "\n";
 		else
-			std::cout << std::fixed << "char: '" << static_cast<char>(convertFloat) << "'\n" << "int: " << static_cast<int>(convertFloat) << "\n" << "float: " << static_cast<float>(convertFloat) << "f\n" << "double: " << static_cast<double>(convertFloat) << "\n";
+			std::cout << std::fixed \
+			<< "char: '" << static_cast<char>(convertFloat) << "'\n" \
+			<< "int: " << static_cast<int>(convertFloat) << "\n" \
+			<< "float: " << static_cast<float>(convertFloat) << "f\n" \
+			<< "double: " << static_cast<double>(convertFloat) << "\n";
 	}
 	catch(const std::out_of_range& e)
 	{
+		std::cout \
+		<< "char: Impossible\n" \
+		<< "int: Impossible\n" \
+		<< "float: Impossible\n" \
+		<< "double: Impossible\n";
 	}
 	catch(const std::invalid_argument& e)
 	{
@@ -162,16 +213,46 @@ void	isDouble(std::string input)
 		double	convertDouble;
 		convertDouble = std::stod(input);
 		if (input == "nan" || input == "-inf" || input == "+inf" || input == "inf")
-			std::cout << std::fixed << "char: Impossible\n"  << "int: Impossible\n" << "float: " << static_cast<float>(convertDouble) << "f\n" << "double: " << static_cast<double>(convertDouble) << "\n";
-		else if (((convertDouble < 32 || convertDouble > 127) || std::isprint(static_cast<unsigned char>(convertDouble)) == false) && (convertDouble < std::numeric_limits<int>::min() || convertDouble > std::numeric_limits<int>::max()))
-			std::cout << std::fixed << "char: Non displayable\n" << "int: Impossible\n" << "float: " << static_cast<float>(convertDouble) << "f\n" << "double: " << static_cast<double>(convertDouble) << "\n";
+			std::cout << std::fixed \
+			<< "char: Impossible\n" \
+			<< "int: Impossible\n" \
+			<< "float: " << static_cast<float>(convertDouble) << "f\n" \
+			<< "double: " << static_cast<double>(convertDouble) << "\n";
+		else if (((convertDouble < 32 || convertDouble > 127) || std::isprint(static_cast<unsigned char>(convertDouble)) == false) && \
+		(convertDouble < static_cast<double>(std::numeric_limits<int>::min()) || convertDouble > static_cast<double>(std::numeric_limits<int>::max())) && \
+		(convertDouble < static_cast<double>(std::numeric_limits<float>::min()) || convertDouble > static_cast<double>(std::numeric_limits<float>::max())))
+			std::cout << std::fixed \
+			<< "char: Non displayable\n" \
+			<< "int: Impossible\n" \
+			<< "float: Impossible\n" \
+			<< "double: " << static_cast<double>(convertDouble) << "\n";
+		else if (((convertDouble < 32 || convertDouble > 127) || std::isprint(static_cast<unsigned char>(convertDouble)) == false) && \
+		(convertDouble < std::numeric_limits<int>::min() || convertDouble > std::numeric_limits<int>::max()))
+			std::cout << std::fixed \
+			<< "char: Non displayable\n" \
+			<< "int: Impossible\n" \
+			<< "float: " << static_cast<float>(convertDouble) << "f\n" \
+			<< "double: " << static_cast<double>(convertDouble) << "\n";
 		else if ((convertDouble < 32 || convertDouble > 127) || std::isprint(static_cast<unsigned char>(convertDouble)) == false)
-			std::cout << std::fixed << "char: Non displayable\n" << "int: " << static_cast<int>(convertDouble) << "\n" << "float: " << static_cast<float>(convertDouble) << "f\n" << "double: " << static_cast<double>(convertDouble) << "\n";
+			std::cout << std::fixed \
+			<< "char: Non displayable\n" \
+			<< "int: " << static_cast<int>(convertDouble) << "\n" \
+			<< "float: " << static_cast<float>(convertDouble) << "f\n" \
+			<< "double: " << static_cast<double>(convertDouble) << "\n";
 		else
-			std::cout << std::fixed << "char: '" << static_cast<char>(convertDouble) << "'\n" << "int: " << static_cast<int>(convertDouble) << "\n" << "float: " << static_cast<float>(convertDouble) << "f\n" << "double: " << static_cast<double>(convertDouble) << "\n";
+			std::cout << std::fixed \
+			<< "char: '" << static_cast<char>(convertDouble) << "'\n" \
+			<< "int: " << static_cast<int>(convertDouble) << "\n" \
+			<< "float: " << static_cast<float>(convertDouble) << "f\n" \
+			<< "double: " << static_cast<double>(convertDouble) << "\n";
 	}
 	catch(const std::out_of_range& e)
 	{
+		std::cout \
+		<< "char: Impossible\n" \
+		<< "int: Impossible\n" \
+		<< "float: Impossible\n" \
+		<< "double: Impossible\n";
 	}
 	catch(const std::invalid_argument& e)
 	{
