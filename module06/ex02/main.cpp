@@ -6,7 +6,7 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 12:08:18 by plang             #+#    #+#             */
-/*   Updated: 2024/11/05 14:57:41 by plang            ###   ########.fr       */
+/*   Updated: 2024/11/06 11:54:40 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ void	identify(Base &p)
 int	main(void)
 {
 	srand((time(NULL)));
+	
 	Base *test1 = nullptr;
 	test1 = generate();
 	identify(test1);
