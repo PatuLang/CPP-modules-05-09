@@ -6,7 +6,7 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 12:23:51 by plang             #+#    #+#             */
-/*   Updated: 2024/11/04 14:46:58 by plang            ###   ########.fr       */
+/*   Updated: 2024/11/06 12:13:41 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,7 +147,6 @@ void	isFloat(std::string input)
 	}
 	catch(const std::out_of_range& e)
 	{
-		std::cout << "char: Impossible\n" << "int: Impossible\n" << "float: Impossible\n" << "double: Impossible\n";
 	}
 	catch(const std::invalid_argument& e)
 	{
@@ -173,7 +172,6 @@ void	isDouble(std::string input)
 	}
 	catch(const std::out_of_range& e)
 	{
-		std::cout << "double out\n";
 	}
 	catch(const std::invalid_argument& e)
 	{
