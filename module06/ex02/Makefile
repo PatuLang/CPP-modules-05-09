@@ -6,11 +6,11 @@
 #    By: plang <plang@student.hive.fi>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/05 12:08:21 by plang             #+#    #+#              #
-#    Updated: 2024/11/05 12:10:18 by plang            ###   ########.fr        #
+#    Updated: 2024/11/06 17:13:47 by plang            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = Serializer
+NAME = Identifier
 
 CXX = c++
 
