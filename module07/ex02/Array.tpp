@@ -6,7 +6,7 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 14:42:19 by plang             #+#    #+#             */
-/*   Updated: 2024/11/08 17:40:34 by plang            ###   ########.fr       */
+/*   Updated: 2024/11/11 11:47:46 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ Array<T>::Array() : arrPtr(nullptr), n(0)
 template<typename T>
 Array<T>::Array(unsigned int _n) : arrPtr(new T[_n]), n(_n)
 {
+	for (unsigned int i = 0; i < n; i++)
+		arrPtr[i] = T();
 }
 
 template<typename T>

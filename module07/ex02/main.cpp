@@ -6,7 +6,7 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 16:59:15 by plang             #+#    #+#             */
-/*   Updated: 2024/11/08 18:12:28 by plang            ###   ########.fr       */
+/*   Updated: 2024/11/11 11:51:25 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	main(void)
 {
 	try
 	{
-		Array<std::string> two(5);
+		Array<std::string> two(6);
 		std::string word[] = {"Hello", "from", "the", "other", "side"};
 
 		for (unsigned int i = 0; i < std::min(static_cast<unsigned long>(two.size()), sizeof(word)/sizeof(word[0])); i++)
@@ -87,7 +87,7 @@ int	main(void)
 	try
 	{
 		Array<int> two(7);
-		int numbers[] = {1, 2, 3, 4, 5, 5, 6};
+		int numbers[] = {1, 2, 2147483647, 4, 5, 6, 7, 8, 40};
 
 		for (unsigned int i = 0; i < std::min(static_cast<unsigned long>(two.size()), sizeof(numbers)/sizeof(numbers[0])); i++)
 			two[i] = numbers[i];
@@ -95,8 +95,7 @@ int	main(void)
 			std::cout << two[i] << "\n";
 		std::cout << "\n";
 
-		Array<int> four;
-		four = two;
+		Array<int> four(two);
 		int morenumbers[] = {100, 200, 300, 400, 500, 500, 600};
 
 		for (unsigned int i = 0; i < std::min(static_cast<unsigned long>(four.size()), sizeof(morenumbers)/sizeof(morenumbers[0])); i++)
@@ -121,8 +120,8 @@ int	main(void)
 	}
 	try
 	{
-		Array<double> two(7);
-		double numbers[] = {1.9, 2.9, 3.9, 4.9, 5.9, 5.9, 6.9};
+		Array<double> two(10);
+		double numbers[] = {1.9, 2.9, 3.9, 4.9, 5.9, 6.9, 7.9};
 
 		for (unsigned int i = 0; i < std::min(static_cast<unsigned long>(two.size()), sizeof(numbers)/sizeof(numbers[0])); i++)
 			two[i] = numbers[i];
@@ -130,9 +129,8 @@ int	main(void)
 			std::cout << two[i] << "\n";
 		std::cout << "\n";
 
-		Array<double> four;
-		four = two;
-		double morenumbers[] = {10.9, 20.9, 30.9, 40.9, 50.9, 50.9, 60.9};
+		Array<double> four(two);
+		double morenumbers[] = {10.9, 20.9, 30.9, 40.9, 50.9, 60.9, 70.9};
 
 		for (unsigned int i = 0; i < std::min(static_cast<unsigned long>(four.size()), sizeof(morenumbers)/sizeof(morenumbers[0])); i++)
 			four[i] = morenumbers[i];
