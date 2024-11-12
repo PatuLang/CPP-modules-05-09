@@ -6,7 +6,7 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 11:06:03 by plang             #+#    #+#             */
-/*   Updated: 2024/11/07 14:41:57 by plang            ###   ########.fr       */
+/*   Updated: 2024/11/12 10:50:52 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,18 +29,14 @@ void	swap(T &argOne, T &argtTwo)
 template<typename T>
 T	min(T argOne, T argtTwo)
 {
-	T min;
-	min = (argOne < argtTwo) ? argOne : argtTwo;
-	return min;
+	return (argOne < argtTwo) ? argOne : argtTwo;
 }
 
 // max function template
 template<typename T>
 T	max(T argOne, T argtTwo)
 {
-	T max;
-	max = (argOne > argtTwo) ? argOne : argtTwo;
-	return max;
+	return (argOne > argtTwo) ? argOne : argtTwo;
 }
 
 #endif
