@@ -6,7 +6,7 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 11:24:46 by plang             #+#    #+#             */
-/*   Updated: 2024/10/28 14:51:09 by plang            ###   ########.fr       */
+/*   Updated: 2024/11/14 16:56:36 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,6 @@ ShrubberyCreationForm::ShrubberyCreationForm(std::string _target) : AForm("Shrub
 
 ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &other) : AForm(other), target(other.target)
 {
-}
-
-ShrubberyCreationForm& ShrubberyCreationForm::operator=(const ShrubberyCreationForm &other)
-{
-	if (this != &other)
-		target = other.target;
-	return *this;
 }
 
 ShrubberyCreationForm::~ShrubberyCreationForm()

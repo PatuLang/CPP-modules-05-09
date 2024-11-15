@@ -6,7 +6,7 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 15:18:05 by plang             #+#    #+#             */
-/*   Updated: 2024/10/31 14:46:15 by plang            ###   ########.fr       */
+/*   Updated: 2024/11/14 16:55:53 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,6 @@ Intern::Intern()
 
 Intern::Intern(const Intern&)
 {
-}
-
-Intern& Intern::operator=(const Intern&)
-{
-	return *this;
 }
 
 Intern::~Intern()

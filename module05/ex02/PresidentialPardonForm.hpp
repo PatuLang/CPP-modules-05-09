@@ -6,7 +6,7 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 11:24:37 by plang             #+#    #+#             */
-/*   Updated: 2024/10/25 15:01:56 by plang            ###   ########.fr       */
+/*   Updated: 2024/11/14 16:54:13 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ class PresidentialPardonForm : public AForm
 		PresidentialPardonForm();
 		PresidentialPardonForm(std::string);
 		PresidentialPardonForm(const PresidentialPardonForm&);
-		PresidentialPardonForm& operator=(const PresidentialPardonForm&);
+		PresidentialPardonForm& operator=(const PresidentialPardonForm&) = delete;
 		~PresidentialPardonForm();
 
 		void	execute(Bureaucrat const &executor) const override;

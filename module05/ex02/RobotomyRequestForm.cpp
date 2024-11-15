@@ -6,7 +6,7 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 11:24:41 by plang             #+#    #+#             */
-/*   Updated: 2024/10/28 13:48:02 by plang            ###   ########.fr       */
+/*   Updated: 2024/11/14 16:54:27 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,6 @@ RobotomyRequestForm::RobotomyRequestForm(std::string _target) : AForm("RobotomyR
 
 RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &other) : AForm(other), target(other.target)
 {
-}
-
-RobotomyRequestForm& RobotomyRequestForm::operator=(const RobotomyRequestForm &other)
-{
-	if (this != &other)
-		target = other.target;
-	return *this;
 }
 
 RobotomyRequestForm::~RobotomyRequestForm()

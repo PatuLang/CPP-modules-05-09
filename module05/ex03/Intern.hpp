@@ -6,7 +6,7 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 15:18:21 by plang             #+#    #+#             */
-/*   Updated: 2024/10/31 14:43:49 by plang            ###   ########.fr       */
+/*   Updated: 2024/11/14 16:56:00 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ class Intern
 	public:
 		Intern();
 		Intern(const Intern&);
-		Intern&	operator=(const Intern&);
+		Intern&	operator=(const Intern&) = delete;
 		~Intern();
 		
 		AForm*	makeForm(std::string, std::string);

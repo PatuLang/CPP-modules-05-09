@@ -6,7 +6,7 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 10:06:43 by plang             #+#    #+#             */
-/*   Updated: 2024/10/25 11:30:54 by plang            ###   ########.fr       */
+/*   Updated: 2024/11/14 16:51:06 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ class Bureaucrat
 		Bureaucrat();
 		Bureaucrat(std::string, int);
 		Bureaucrat(const Bureaucrat&);
-		Bureaucrat& operator=(const Bureaucrat&);
+		Bureaucrat& operator=(const Bureaucrat&) = delete;
 		~Bureaucrat();
 		
 		std::string	getName() const;

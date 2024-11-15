@@ -6,7 +6,7 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 11:24:34 by plang             #+#    #+#             */
-/*   Updated: 2024/10/28 10:54:38 by plang            ###   ########.fr       */
+/*   Updated: 2024/11/14 16:56:10 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,6 @@ PresidentialPardonForm::PresidentialPardonForm(std::string _target) : AForm("Pre
 
 PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm &other) : AForm(other), target(other.target)
 {
-}
-
-PresidentialPardonForm& PresidentialPardonForm::operator=(const PresidentialPardonForm &other)
-{
-	if (this != &other)
-		target = other.target;
-	return *this;
 }
 
 PresidentialPardonForm::~PresidentialPardonForm()

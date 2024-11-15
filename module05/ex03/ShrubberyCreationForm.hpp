@@ -6,7 +6,7 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 11:24:49 by plang             #+#    #+#             */
-/*   Updated: 2024/10/28 14:51:35 by plang            ###   ########.fr       */
+/*   Updated: 2024/11/14 16:56:44 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ class ShrubberyCreationForm : public AForm
 		ShrubberyCreationForm();
 		ShrubberyCreationForm(std::string);
 		ShrubberyCreationForm(const ShrubberyCreationForm&);
-		ShrubberyCreationForm& operator=(const ShrubberyCreationForm&);
+		ShrubberyCreationForm& operator=(const ShrubberyCreationForm&) = delete;
 		~ShrubberyCreationForm();
 
 		void	execute(Bureaucrat const &executor) const override;

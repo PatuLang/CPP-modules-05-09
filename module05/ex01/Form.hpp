@@ -6,7 +6,7 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 14:45:10 by plang             #+#    #+#             */
-/*   Updated: 2024/10/25 11:33:14 by plang            ###   ########.fr       */
+/*   Updated: 2024/11/14 16:52:46 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ class Form
 		Form();
 		Form(std::string, int, int);
 		Form(const Form&);
-		Form& operator=(const Form&);
+		Form& operator=(const Form&) = delete;
 		~Form();
 		
 		std::string	getName() const;

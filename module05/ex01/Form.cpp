@@ -6,7 +6,7 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 14:45:07 by plang             #+#    #+#             */
-/*   Updated: 2024/10/29 11:49:35 by plang            ###   ########.fr       */
+/*   Updated: 2024/11/14 16:52:56 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,6 @@ Form::Form(const Form &other) : name(other.name), gradeToSign(other.gradeToSign)
 		throw GradeTooLowException();
 	if (gradeToExecute < 1)
 		throw GradeTooHighException();
-}
-
-Form&   Form::operator=(const Form &other)
-{
-	if (this != &other)
-		isSigned = other.isSigned;
-	return *this;
 }
 
 Form::~Form()

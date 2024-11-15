@@ -30,7 +30,7 @@ class AForm
 		AForm();
 		AForm(std::string, int, int);
 		AForm(const AForm&);
-		AForm& operator=(const AForm&);
+		AForm& operator=(const AForm&) = delete;
 		virtual ~AForm();
 		
 		std::string		getName() const;

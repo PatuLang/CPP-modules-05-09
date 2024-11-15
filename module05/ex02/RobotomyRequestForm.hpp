@@ -6,7 +6,7 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 11:24:43 by plang             #+#    #+#             */
-/*   Updated: 2024/10/25 16:20:18 by plang            ###   ########.fr       */
+/*   Updated: 2024/11/14 16:54:37 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ class RobotomyRequestForm : public AForm
 		RobotomyRequestForm();
 		RobotomyRequestForm(std::string);
 		RobotomyRequestForm(const RobotomyRequestForm&);
-		RobotomyRequestForm& operator=(const RobotomyRequestForm&);
+		RobotomyRequestForm& operator=(const RobotomyRequestForm&) = delete;
 		~RobotomyRequestForm();
 
 		void	execute(Bureaucrat const &executor) const override;

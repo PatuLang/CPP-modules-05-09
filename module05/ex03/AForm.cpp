@@ -43,13 +43,6 @@ AForm::AForm(const AForm &other) : name(other.name), gradeToSign(other.gradeToSi
 		throw GradeTooHighException();
 }
 
-AForm&   AForm::operator=(const AForm &other)
-{
-	if (this != &other)
-		isSigned = other.isSigned;
-	return *this;
-}
-
 AForm::~AForm()
 {
 }

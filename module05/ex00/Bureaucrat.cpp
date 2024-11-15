@@ -6,7 +6,7 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 10:06:25 by plang             #+#    #+#             */
-/*   Updated: 2024/10/29 12:10:49 by plang            ###   ########.fr       */
+/*   Updated: 2024/11/14 16:51:28 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,6 @@ Bureaucrat::Bureaucrat(const Bureaucrat &other) : name(other.name), grade(other.
 		throw GradeTooLowException();
 	if (grade < 1)
 		throw GradeTooHighException();
-}
-
-Bureaucrat&   Bureaucrat::operator=(const Bureaucrat &other)
-{
-	if (this != &other)
-		grade = other.grade;
-	return *this;
 }
 
 Bureaucrat::~Bureaucrat()
