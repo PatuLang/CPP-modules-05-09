@@ -6,7 +6,7 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 10:54:22 by plang             #+#    #+#             */
-/*   Updated: 2024/11/13 18:25:21 by plang            ###   ########.fr       */
+/*   Updated: 2024/11/14 12:47:24 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,10 @@ Span::Span() : N(0)
 
 Span::Span(unsigned int _N) : N(_N)
 {	
+}
+
+Span::Span(const Span &other) : N(other.N), numbers(other.numbers)
+{
 }
 
 Span&	Span::operator=(const Span &other)
@@ -74,10 +78,10 @@ unsigned int	Span::shortestSpan()
 		shortSpan = std::numeric_limits<unsigned int>::max();
 		for (auto iter = numbers.begin(); std::next(iter) != numbers.end(); iter++)
 		{
+			std::cout << (*std::next(iter) - *iter) << " " << *std::next(iter) << " - " << *iter << " \n";
 			if (shortSpan > static_cast<unsigned int>(*std::next(iter) - *iter))
 				shortSpan = (*std::next(iter) - *iter);
 		}
-		return shortSpan;
 	}
 	catch(const std::exception& e)
 	{
@@ -94,7 +98,6 @@ unsigned int	Span::longestSpan()
 		if (numbers.size() < 2)
 			throw std::runtime_error("The container doesn't have enough numbers to get this information");
 		longSpan = (*numbers.rbegin() - *numbers.begin());
-		return longSpan;
 	}
 	catch(const std::exception& e)
 	{

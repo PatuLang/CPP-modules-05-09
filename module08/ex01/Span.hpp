@@ -6,7 +6,7 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 10:54:25 by plang             #+#    #+#             */
-/*   Updated: 2024/11/13 18:06:10 by plang            ###   ########.fr       */
+/*   Updated: 2024/11/13 18:32:44 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ class Span
 	public:
 		Span();
 		Span(unsigned int);
+		Span(const Span&);
 		Span& operator=(const Span&);
 		~Span();
 
