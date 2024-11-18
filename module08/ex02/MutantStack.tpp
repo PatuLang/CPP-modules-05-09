@@ -6,7 +6,7 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 12:57:32 by plang             #+#    #+#             */
-/*   Updated: 2024/11/15 16:52:16 by plang            ###   ########.fr       */
+/*   Updated: 2024/11/18 15:40:32 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,11 @@ MutantStack<T, Container>::MutantStack(const MutantStack &other) : std::stack<T,
 }
 
 template<typename T, typename Container>
-MutantStack<T, Container>& MutantStack<T, Container>::operator=(const MutantStack&)
+MutantStack<T, Container>& MutantStack<T, Container>::operator=(const MutantStack &other)
 {
+	if (this != &other)
+		this->std::stack<T, Container>::operator=(other);
+	return *this;
 }
 
 template<typename T, typename Container>
