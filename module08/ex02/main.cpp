@@ -6,7 +6,7 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 12:54:20 by plang             #+#    #+#             */
-/*   Updated: 2024/11/18 15:54:23 by plang            ###   ########.fr       */
+/*   Updated: 2024/11/18 16:10:33 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,31 +15,41 @@
 
 int	main(void)
 {
-	MutantStack<int> 			intStack, copyStack;
-
-	for (int i = 0; i < 25; i+=3)
-		intStack.push(i);
-
-	copyStack = intStack;
-
-	MutantStack<int>::iterator it = intStack.begin();
-	MutantStack<int>::iterator ite = intStack.end();
-	// while (it != ite)
-	// {
-	// 	std::cout << intStack.top() << std::endl;
-	// 	intStack.pop();
-	// } // shared memory??? segfaults on next loop if we .pop()
-	while (it != ite)
+	try
 	{
-		std::cout << *it << std::endl;
-		it++;
-	}
-	// const_iterator, try to assign to show the const feature
-	for(auto index = copyStack.begin(); index != copyStack.end(); ++index)
-		std::cout << *index << std::endl;
+		MutantStack<int> 			intStack, copyStack;
 
-	MutantStack<std::string>	stringStack;
-	MutantStack<const char *>	cStringStack;
+		for (int i = 0; i < 25; i+=3)
+			intStack.push(i);
+
+		copyStack = intStack;
+		std::cout << "Int stack ------------" << std::endl;
+		while (!intStack.empty())
+		{
+			std::cout << intStack.top() << std::endl;
+			intStack.pop();
+		} // shared memory??? segfaults on next loop if we .pop()
+		MutantStack<int>	otherStack(copyStack);
+		MutantStack<int>::iterator it = otherStack.begin();
+		MutantStack<int>::iterator ite = otherStack.end();
+		std::cout << "Other stack ------------" << std::endl;
+		while (it != ite)
+		{
+			std::cout << *it << std::endl;
+			it++;
+		}
+		// const_iterator, try to assign to show the const feature
+		std::cout << "Copy stack ------------" << std::endl;
+		for(auto index = copyStack.begin(); index != copyStack.end(); ++index)
+			std::cout << *index << std::endl;
+
+		MutantStack<std::string>	stringStack;
+		MutantStack<const char *>	cStringStack;
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
 }
 
 // int main()
