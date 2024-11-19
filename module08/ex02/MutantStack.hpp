@@ -6,7 +6,7 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 12:55:33 by plang             #+#    #+#             */
-/*   Updated: 2024/11/18 14:52:15 by plang            ###   ########.fr       */
+/*   Updated: 2024/11/19 10:28:44 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ class MutantStack : public std::stack<T>
 
 		typedef typename std::stack<T, Container>::container_type::iterator iterator;
 		typedef typename std::stack<T, Container>::container_type::const_iterator const_iterator;
+		// using iterator = typename std::stack<T, Container>::container_type::iterator;
+		// using const_iterator = typename std::stack<T, Container>::container_type::const_iterator;
 		
 		iterator begin();
 		iterator end();
