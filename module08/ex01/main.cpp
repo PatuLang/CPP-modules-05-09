@@ -6,7 +6,7 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 13:08:10 by plang             #+#    #+#             */
-/*   Updated: 2024/11/14 12:52:16 by plang            ###   ########.fr       */
+/*   Updated: 2024/11/19 12:37:38 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,35 @@
 
 int main()
 {
-	Span sp = Span(50000); // smallest is always 0 if the size is 10 000, works fine with 1000, not a deep copy, copys fuck up the other ones, spans get wierd
-	
-	// sp.addNumber(2147483647);
-	// sp.addNumber(-2147483648);
-	// sp.addNumber(17);
-	// sp.addNumber(9);
-	// sp.addNumber(11);
-	// sp.addNumber(11);
-	// sp.addNumber(11);
-	// sp.addNumber(11);
-	// sp.addNumber(11);
-	// sp.addNumber(11);
-	// sp.addNumber(11);
-	sp.addSpan(-25000, 25000);
+	try
+	{
+		Span sp = Span(100);
 
-	std::cout << sp.shortestSpan() << std::endl;
-	std::cout << sp.longestSpan() << std::endl;
+		Span fp(sp);
+		// fp = sp;
+		sp.addNumber(2147483647);
+		sp.addNumber(-2147483648);
+		sp.addNumber(17);
+		sp.addNumber(9);
+		sp.addNumber(350);
+		sp.addNumber(-383);
+		sp.addNumber(848);
+		sp.addNumber(58);
+		sp.addNumber(11000);
+		sp.addNumber(89383);
+		sp.addNumber(0);
+		// sp.addSpan(-25000, 25000);
 
+
+		std::cout << sp.shortestSpan() << std::endl;
+		std::cout << sp.longestSpan() << std::endl;
+		fp.addNumber(0);
+		fp.addNumber(10);
+		std::cout << fp.shortestSpan() << std::endl;
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
 	return 0;
 }
