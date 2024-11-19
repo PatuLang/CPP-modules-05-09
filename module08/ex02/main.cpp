@@ -6,7 +6,7 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 12:54:20 by plang             #+#    #+#             */
-/*   Updated: 2024/11/19 10:36:26 by plang            ###   ########.fr       */
+/*   Updated: 2024/11/19 10:38:13 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ int	main(void)
 		MutantStack<std::string>	stringStack, swapStack;
 
 		stringStack.push("It's ");
+		stringStack.push("a ");
 		stringStack.push("long ");
 		stringStack.push("way ");
 		stringStack.push("to ");
