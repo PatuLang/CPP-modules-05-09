@@ -6,7 +6,7 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 10:54:25 by plang             #+#    #+#             */
-/*   Updated: 2024/11/13 18:32:44 by plang            ###   ########.fr       */
+/*   Updated: 2024/11/20 15:50:00 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <iostream>
 # include <algorithm>
+# include <numeric>
 # include <set>
 # include <limits>
 

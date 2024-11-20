@@ -6,7 +6,7 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 10:54:22 by plang             #+#    #+#             */
-/*   Updated: 2024/11/19 12:36:37 by plang            ###   ########.fr       */
+/*   Updated: 2024/11/20 15:40:29 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,23 +70,18 @@ void	Span::addSpan(int fromThis, int toThat)
 
 unsigned int	Span::shortestSpan()
 {
-	unsigned int	shortSpan = 0;
 	if (numbers.size() < 2)
 		throw std::runtime_error("The container doesn't have enough numbers to get this information");
-	shortSpan = std::numeric_limits<unsigned int>::max();
-	for (auto iter = numbers.begin(); std::next(iter) != numbers.end(); iter++)
-	{
-		if (shortSpan > static_cast<unsigned int>(*std::next(iter) - *iter))
-			shortSpan = (*std::next(iter) - *iter);
-	}
-	return shortSpan;
+	std::multiset<int> sSpan;
+	std::adjacent_difference(numbers.begin(), numbers.end(), std::inserter(sSpan, sSpan.begin()));
+	std::multiset<int>::iterator min = std::min_element(++sSpan.begin(), sSpan.end());
+	return *min;
 }
 
 unsigned int	Span::longestSpan()
 {
-	unsigned int	longSpan = 0;
 	if (numbers.size() < 2)
 		throw std::runtime_error("The container doesn't have enough numbers to get this information");
-	longSpan = (*numbers.rbegin() - *numbers.begin());
-	return longSpan;
+	auto [min, max] = std::minmax_element(numbers.begin(), numbers.end());
+	return (*max - *min);
 }
