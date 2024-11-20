@@ -6,7 +6,7 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 10:54:22 by plang             #+#    #+#             */
-/*   Updated: 2024/11/20 15:40:29 by plang            ###   ########.fr       */
+/*   Updated: 2024/11/20 16:14:51 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,12 @@ void	Span::addSpan(int fromThis, int toThat)
 {
 	try
 	{
+		if (toThat < fromThis)
+			throw std::runtime_error("Range is going in the wrong direction");
 		if (((toThat) - (fromThis)) > static_cast<int>(N))
 			throw std::runtime_error("This range is too big for the container");
+		if (static_cast<int>(((toThat) - (fromThis)) + numbers.size()) > static_cast<int>(N))
+			throw std::runtime_error("The container can't fit all the numbers");
 		for (int i = fromThis; i <= toThat; i++)
 			numbers.insert(i);
 	}

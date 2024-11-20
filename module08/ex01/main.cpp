@@ -6,7 +6,7 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 13:08:10 by plang             #+#    #+#             */
-/*   Updated: 2024/11/20 15:45:41 by plang            ###   ########.fr       */
+/*   Updated: 2024/11/20 16:15:45 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int main()
 		sp.addNumber(11000);
 		sp.addNumber(89383);
 		sp.addNumber(0);
-		sp.addSpan(-25000, 25000);
+		sp.addSpan(10, 100);
 
 		std::cout << sp.shortestSpan() << std::endl;
 		std::cout << sp.longestSpan() << std::endl;
