@@ -6,7 +6,7 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 13:08:10 by plang             #+#    #+#             */
-/*   Updated: 2024/11/19 12:37:38 by plang            ###   ########.fr       */
+/*   Updated: 2024/11/20 15:45:41 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,9 @@ int main()
 {
 	try
 	{
-		Span sp = Span(100);
-
+		Span sp(100);
 		Span fp(sp);
-		// fp = sp;
+
 		sp.addNumber(2147483647);
 		sp.addNumber(-2147483648);
 		sp.addNumber(17);
@@ -31,14 +30,15 @@ int main()
 		sp.addNumber(11000);
 		sp.addNumber(89383);
 		sp.addNumber(0);
-		// sp.addSpan(-25000, 25000);
-
+		sp.addSpan(-25000, 25000);
 
 		std::cout << sp.shortestSpan() << std::endl;
 		std::cout << sp.longestSpan() << std::endl;
 		fp.addNumber(0);
 		fp.addNumber(10);
 		std::cout << fp.shortestSpan() << std::endl;
+		std::cout << fp.longestSpan() << std::endl;
+
 	}
 	catch(const std::exception& e)
 	{
