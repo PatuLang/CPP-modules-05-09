@@ -6,7 +6,7 @@
 #    By: plang <plang@student.hive.fi>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/13 13:30:34 by plang             #+#    #+#              #
-#    Updated: 2024/11/13 13:31:22 by plang            ###   ########.fr        #
+#    Updated: 2024/11/20 15:46:30 by plang            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = Span
 
 CXX = c++
 
-CXXFLAGS = -Werror -Wall -Wextra -g #-fsanitize=address
+CXXFLAGS = -Werror -Wall -Wextra -g -std=c++2b #-fsanitize=address
 
 SRCS = main.cpp \
 		Span.cpp
