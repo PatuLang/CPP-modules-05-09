@@ -6,7 +6,7 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 12:54:20 by plang             #+#    #+#             */
-/*   Updated: 2024/11/19 10:38:13 by plang            ###   ########.fr       */
+/*   Updated: 2024/11/20 11:05:32 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int	main(void)
 			std::cout << *iter << std::endl;
 
 		std::cout << "\nSwap stack after swap ------------" << std::endl;
-		for (auto iter = swapStack.begin(); iter != swapStack.end(); ++iter)
-			std::cout << *iter << std::endl;
+		for (auto& string : swapStack)
+			std::cout << string << std::endl;
 	}
 }
