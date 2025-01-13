@@ -6,7 +6,7 @@
 #    By: plang <plang@student.hive.fi>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/22 11:59:18 by plang             #+#    #+#              #
-#    Updated: 2024/11/22 12:06:04 by plang            ###   ########.fr        #
+#    Updated: 2025/01/10 14:37:38 by plang            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CXX = c++
 
 CXXFLAGS = -Werror -Wall -Wextra -g #-fsanitize=address
 
-SRCS = main.cpp
+SRCS = main.cpp BitcoinExchange.cpp
 
 OBJS =	$(SRCS:.cpp=.o)
 
