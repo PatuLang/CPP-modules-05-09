@@ -6,7 +6,7 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 12:11:11 by plang             #+#    #+#             */
-/*   Updated: 2025/01/14 16:36:59 by plang            ###   ########.fr       */
+/*   Updated: 2025/01/14 16:43:02 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,10 +150,7 @@ void	BitcoinExchange::calculateExchangeRate(const std::string inputTimestamp, co
 		std::cout << std::fixed << std::setprecision(1) << "(" << std::prev(m_dataBase.end())->first << ")-> " << inputTimestamp << " => " << value << " = " << result << std::endl;
 	}
 	else if (dateInNumber < m_dataBase.begin()->first)
-	{
-		std::cout << m_dataBase.begin()->first << std::endl;
 		throw std::runtime_error("Error: bitcoin was not a thing according to the database");
-	}
 	else if (m_dataBase.find(dateInNumber) != m_dataBase.end())
 	{
 		result = m_dataBase.find(dateInNumber)->second * value;
