@@ -6,7 +6,7 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 12:11:14 by plang             #+#    #+#             */
-/*   Updated: 2025/01/13 19:05:53 by plang            ###   ########.fr       */
+/*   Updated: 2025/01/14 13:41:54 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,25 @@
 # include <sstream>
 # include <ctime>
 # include <fstream>
-#include <iomanip>
-#include <regex>
-#include <limits.h>
+# include <iomanip>
+# include <regex>
+# include <limits.h>
 
+enum monthDays
+{
+	JANUARY = 1,
+	FEBRUARY = 2,
+	MARCH = 3,
+	APRIL = 4,
+	MAY = 5,
+	JUNE = 6,
+	JULY = 7,
+	AUGUST = 8,
+	SEPTEMBER = 9,
+	OCTOBER = 10,
+	NOVEMBER = 11,
+	DECEMBER = 12
+};
 
 class BitcoinExchange
 {
@@ -38,6 +53,9 @@ class BitcoinExchange
 
 		void	readInput(const std::string);
 		void	calculateExchangeRate(const std::string, const double);
+		int		getCurrentTime();
+		bool	validateLeapYear(int);
+		bool	validateDate(int, int, int);
 };
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 12:11:11 by plang             #+#    #+#             */
-/*   Updated: 2025/01/13 19:39:27 by plang            ###   ########.fr       */
+/*   Updated: 2025/01/14 16:36:59 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ BitcoinExchange::BitcoinExchange()
 		timeStamp = line.substr(0, comma);
 		if (std::regex_match(timeStamp, regexTimeStamp) == false)
 			throw std::runtime_error("Error: database has been tampered with");
-		dateInNumber = std::stoi(timeStamp.substr(0, 4)) * 1000 + \
-			std::stoi(timeStamp.substr(5, 7)) * 100 + \
-			std::stoi(timeStamp.substr(8, 10));
+		dateInNumber = std::stoi(timeStamp.substr(0, 4)) * 10000 + \
+			std::stoi(timeStamp.substr(5, 2)) * 100 + \
+			std::stoi(timeStamp.substr(8, 2));
 		rate = line.substr(comma + 1, line.size());
 		if (std::regex_match(rate, regexRate) == false)
 			throw std::runtime_error("Error: database has been tampered with");
@@ -119,31 +119,40 @@ void	BitcoinExchange::readInput(const std::string inputFile)
 			std::cerr << "Error: too large a number." << std::endl;
 			continue ;
 		}
-		calculateExchangeRate(timeStamp, doubleValue);
+		try
+		{
+			calculateExchangeRate(timeStamp, doubleValue);
+		}
+		catch(const std::exception& e)
+		{
+			std::cerr << e.what() << '\n';
+			continue ;
+		}
+		
 	}
 }
 
 void	BitcoinExchange::calculateExchangeRate(const std::string inputTimestamp, const double value)
 {
 	double result = 0;
-	std::regex regexYear (R"(^(2009|201[0-9]|202[0-2])-(0[1-9]|1[0-2])-(0[1-9]|[1-2]\d|3[0-1])$)");
-	int	dateInNumber = dateInNumber = std::stoi(inputTimestamp.substr(0, 4)) * 1000 + \
-		std::stoi(inputTimestamp.substr(5, 7)) * 100 + \
-		std::stoi(inputTimestamp.substr(8, 10));
+	int year = std::stoi(inputTimestamp.substr(0, 4));
+	int	month = std::stoi(inputTimestamp.substr(5, 2));
+	int	day = std::stoi(inputTimestamp.substr(8, 2));
+	int	dateInNumber = year * 10000 + month * 100 + day;
 
-	if (std::regex_match(inputTimestamp, regexYear) == false)
+	if (validateDate(year, month, day) == false)
+		throw std::runtime_error("Error: date is not valid");
+	if (dateInNumber > getCurrentTime())
+		throw std::runtime_error("Error: we can not look into the future");
+	if (dateInNumber > std::prev(m_dataBase.end())->first)
 	{
-		double year = std::stod(inputTimestamp.substr(0, 4));
-		if (year > static_cast<double>(2022))
-		{
-			result = std::prev(m_dataBase.end())->second * value;
-			std::cout << std::fixed << std::setprecision(1) << inputTimestamp << " => " << value << " = " << result << std::endl;
-		}
-		else if (year < static_cast<double>(2009))
-		{
-			result = std::next(m_dataBase.begin())->second * value;
-			std::cout << std::fixed << std::setprecision(1) << inputTimestamp << " => " << value << " = " << result << std::endl;
-		}
+		result = std::prev(m_dataBase.end())->second * value;
+		std::cout << std::fixed << std::setprecision(1) << "(" << std::prev(m_dataBase.end())->first << ")-> " << inputTimestamp << " => " << value << " = " << result << std::endl;
+	}
+	else if (dateInNumber < m_dataBase.begin()->first)
+	{
+		std::cout << m_dataBase.begin()->first << std::endl;
+		throw std::runtime_error("Error: bitcoin was not a thing according to the database");
 	}
 	else if (m_dataBase.find(dateInNumber) != m_dataBase.end())
 	{
@@ -152,31 +161,73 @@ void	BitcoinExchange::calculateExchangeRate(const std::string inputTimestamp, co
 	}
 	else 
 	{
-		int	difference = std::prev(m_dataBase.end())->first;
 		int	closestMatch = 0;
-		for (auto iter = std::next(m_dataBase.begin()); iter != m_dataBase.end(); iter++)
+		for (auto iter = m_dataBase.begin(); iter != m_dataBase.end(); iter++)
 		{
-			int	absolutValue = std::abs(iter->first - dateInNumber);
-			if (absolutValue < difference)
+			if (iter->first < dateInNumber)
 			{
-				difference = absolutValue;
 				closestMatch = iter->first;
 			}
 		}
 		if (closestMatch == std::prev(m_dataBase.end())->first)
 		{
 			result = std::prev(m_dataBase.end())->second * value;
-			std::cout << std::fixed << std::setprecision(1) << inputTimestamp << " => " << value << " = " << result << std::endl;
+			std::cout << std::fixed << std::setprecision(1) << "(" << std::prev(m_dataBase.end())->first << ")-> " << inputTimestamp << " => " << value << " = " << result << std::endl;
 		}
-		else if (closestMatch == std::next(m_dataBase.begin())->first)
+		else if (closestMatch == m_dataBase.begin()->first)
 		{
-			result = std::next(m_dataBase.begin())->second * value;
-			std::cout << std::fixed << std::setprecision(1) << inputTimestamp << " => " << value << " = " << result << std::endl;
+			result = m_dataBase.begin()->second * value;
+			std::cout << std::fixed << std::setprecision(1) << "(" << m_dataBase.begin()->first << ")-> " << inputTimestamp << " => " << value << " = " << result << std::endl;
 		}
 		else
 		{
-			result = std::prev(m_dataBase.find(closestMatch))->second * value;
-			std::cout << std::fixed << std::setprecision(1) << inputTimestamp << " => " << value << " = " << result << std::endl;
+			result = m_dataBase.upper_bound(closestMatch)->second * value;
+			std::cout << std::fixed << std::setprecision(1) << "(" << m_dataBase.lower_bound(closestMatch)->first << ")-> " << inputTimestamp << " => " << value << " = " << result << std::endl;
 		}
 	}
+}
+
+int	BitcoinExchange::getCurrentTime()
+{
+	time_t	now = time(0);
+	tm*		timeinfo = localtime(&now);
+	char	timestamp[20];
+
+	strftime(timestamp, sizeof(timestamp), "%Y-%m-%d", timeinfo);
+	std::string stdString(timestamp);
+	int	dateInNumber = std::stoi(stdString.substr(0, 4)) * 10000 + \
+		std::stoi(stdString.substr(5, 2)) * 100 + \
+		std::stoi(stdString.substr(8, 2));
+	return dateInNumber;
+}
+
+bool	BitcoinExchange::validateLeapYear(int year)
+{
+	if (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0))
+		return true;
+	else
+		return false;
+}
+
+bool	BitcoinExchange::validateDate(int year, int month, int day)
+{
+	if (day <= 31 && (month == JANUARY\
+		|| month == MARCH || month == MAY\
+		|| month == JULY || month == AUGUST \
+		|| month == OCTOBER || month == DECEMBER))
+		return true;
+	else if (day <= 30 && (month == APRIL || month == JUNE\
+		|| month == SEPTEMBER || month == NOVEMBER ))
+		return true;
+	else if (month == FEBRUARY)
+	{
+		if (validateLeapYear(year) == true && day <= 29)
+			return true;
+		else if (day <= 28)
+			return true;
+		else
+			return false;
+	}
+	else
+		return false;
 }
