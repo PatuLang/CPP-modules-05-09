@@ -6,7 +6,7 @@
 #    By: plang <plang@student.hive.fi>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/22 11:59:50 by plang             #+#    #+#              #
-#    Updated: 2024/11/22 12:06:18 by plang            ###   ########.fr        #
+#    Updated: 2025/01/27 16:00:37 by plang            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,9 +14,9 @@ NAME = RPN
 
 CXX = c++
 
-CXXFLAGS = -Werror -Wall -Wextra -g #-fsanitize=address
+CXXFLAGS = -Werror -Wall -Wextra -g -std=c++2b#-fsanitize=address
 
-SRCS = main.cpp
+SRCS = main.cpp RPN.cpp
 
 OBJS =	$(SRCS:.cpp=.o)
 
