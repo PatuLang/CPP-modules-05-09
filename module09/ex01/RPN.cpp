@@ -6,13 +6,11 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 12:11:23 by plang             #+#    #+#             */
-/*   Updated: 2025/01/27 18:19:31 by plang            ###   ########.fr       */
+/*   Updated: 2025/01/28 15:59:38 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "RPN.hpp"
-#include <ranges>
-#include <algorithm>
 
 RPN::RPN()
 {
@@ -59,6 +57,45 @@ operators	RPN::identifyOperator(std::string whatOperator)
 	throw std::runtime_error("Error: could not identify operator");
 }
 
+int	RPN::checkOverflow(int pop2, int pop1, operators op)
+{
+	int	result = 0;
+	switch (op)
+	{
+		case PLUS:
+		{
+			if ((pop1 > 0 && pop2 > (INT_MAX - pop1)) || (pop1 < 0 && pop2 < (INT_MIN - pop1)))
+				throw std::runtime_error("Error: integer overflow");
+			result = pop2 + pop1;
+			break;
+		}
+		case MINUS:
+		{
+			if ((pop1 < 0 && pop2 > (INT_MAX + pop1)) || (pop1 > 0 && pop2 < (INT_MIN + pop1)))
+				throw std::runtime_error("Error: integer overflow");
+			result = pop2 - pop1;
+			break;
+		}
+		case MULTIPLICATION:
+		{
+			if (pop1 != 0 && (pop2 > (INT_MAX / pop1) || pop2 < (INT_MIN / pop1)))
+				throw std::runtime_error("Error: integer overflow");
+			result = pop2 * pop1;
+			break;
+		}
+		case DIVISION:
+		{
+			if (pop1 == 0)
+				throw std::runtime_error("Error: division by zero");
+			if (pop2 == INT_MIN && pop1 == -1)
+				throw std::runtime_error("Error: integer overflow");
+			result = pop2 / pop1;
+			break;
+		}
+	}
+	return result;
+}
+
 void	RPN::calculateInput(std::string inputString)
 {
 	std::stringstream	rpn(inputString);
@@ -86,24 +123,23 @@ void	RPN::calculateInput(std::string inputString)
 				{
 					case PLUS:
 					{
-						result.push_back(pop2 + pop1);
+						result.push_back(checkOverflow(pop2, pop1, PLUS));
 						break;
 					}
 					case MINUS:
 					{
-						result.push_back(pop2 - pop1);
+						result.push_back(checkOverflow(pop2, pop1, MINUS));
 						break;
 					}
 					case MULTIPLICATION:
 					{
-						result.push_back(pop2 * pop1);
+						result.push_back(checkOverflow(pop2, pop1, MULTIPLICATION));
 						break;
 					}
 					case DIVISION:
 					{
-						if (pop1 == 0)
-							throw std::runtime_error("Error: division by zero");
-						result.push_back(pop2 / pop1);
+						std::cout << pop1 << " divi " << pop2 << std::endl;
+						result.push_back(checkOverflow(pop2, pop1, DIVISION));
 						break;
 					}
 					default:
@@ -114,7 +150,7 @@ void	RPN::calculateInput(std::string inputString)
 	}
 	if (result.size() == 0 || result.size() > 1)
 		throw std::runtime_error("Error: RPN not valid, container has more then one element");
-	std::cout << static_cast<double>(result.at(0)) << std::endl;
+	std::cout << result.at(0) << std::endl;
 }
 
 void	RPN::checkInput()

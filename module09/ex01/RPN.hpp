@@ -6,7 +6,7 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 12:11:26 by plang             #+#    #+#             */
-/*   Updated: 2025/01/27 18:02:00 by plang            ###   ########.fr       */
+/*   Updated: 2025/01/28 13:53:20 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <sstream>
 # include <deque>
 # include <string>
+# include <limits.h>
 
 enum operators
 {
@@ -43,6 +44,7 @@ class RPN
 
 		std::deque<std::string>	splitRPN(std::string);
 		void					checkInput();
+		int						checkOverflow(int, int, operators);
 		void					calculateInput(std::string);
 		operators				identifyOperator(std::string);
 };
