@@ -6,7 +6,7 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 12:11:14 by plang             #+#    #+#             */
-/*   Updated: 2025/01/14 13:41:54 by plang            ###   ########.fr       */
+/*   Updated: 2025/01/27 10:28:13 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ class BitcoinExchange
 {
 	private:
 		std::map<int, float>		m_dataBase;
-		// std::multimap<std::string, float>	m_inputFile;
 		
 		BitcoinExchange(const BitcoinExchange &);
 		const BitcoinExchange &	operator=(const BitcoinExchange &);

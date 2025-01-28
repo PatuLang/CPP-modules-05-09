@@ -6,13 +6,9 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 12:11:11 by plang             #+#    #+#             */
-/*   Updated: 2025/01/14 16:43:02 by plang            ###   ########.fr       */
+/*   Updated: 2025/01/27 11:14:20 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-
-// default file for webser. test.conf if not supplied by user. cookies. default settings? remove completely? check for all server settings after extraction?
-
 
 #include "BitcoinExchange.hpp"
 
@@ -45,12 +41,12 @@ BitcoinExchange::BitcoinExchange()
 			throw std::runtime_error("Error: database has been tampered with");
 		m_dataBase.emplace(dateInNumber, std::stod(rate));
 	}
-	std::cout << "Printing data: \n";
-	for(auto &line: m_dataBase)
-	{
-		std::cout << line.first << " -- " << line.second << std::endl;
-	}
-	std::cout << "Printing data done: \n\n";
+	// std::cout << "Printing data: \n";
+	// for(auto &line: m_dataBase)
+	// {
+	// 	std::cout << line.first << " -- " << line.second << std::endl;
+	// }
+	// std::cout << "Printing data done: \n\n";
 }
 
 BitcoinExchange::BitcoinExchange(const BitcoinExchange &other)

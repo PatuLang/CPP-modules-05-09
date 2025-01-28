@@ -6,11 +6,9 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 12:11:17 by plang             #+#    #+#             */
-/*   Updated: 2025/01/13 11:54:11 by plang            ###   ########.fr       */
+/*   Updated: 2025/01/27 10:27:57 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-// we are using the container of type <map>
 
 #include "BitcoinExchange.hpp"
 
