@@ -6,7 +6,7 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 12:11:23 by plang             #+#    #+#             */
-/*   Updated: 2025/01/28 15:59:38 by plang            ###   ########.fr       */
+/*   Updated: 2025/01/29 13:28:16 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,7 +138,6 @@ void	RPN::calculateInput(std::string inputString)
 					}
 					case DIVISION:
 					{
-						std::cout << pop1 << " divi " << pop2 << std::endl;
 						result.push_back(checkOverflow(pop2, pop1, DIVISION));
 						break;
 					}
