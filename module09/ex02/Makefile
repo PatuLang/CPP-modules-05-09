@@ -6,7 +6,7 @@
 #    By: plang <plang@student.hive.fi>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/22 12:00:13 by plang             #+#    #+#              #
-#    Updated: 2024/11/22 12:06:37 by plang            ###   ########.fr        #
+#    Updated: 2025/01/31 13:59:06 by plang            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CXX = c++
 
 CXXFLAGS = -Werror -Wall -Wextra -g #-fsanitize=address
 
-SRCS = main.cpp
+SRCS = main.cpp PmergeMe.cpp
 
 OBJS =	$(SRCS:.cpp=.o)
 
