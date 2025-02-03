@@ -6,7 +6,7 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 12:11:29 by plang             #+#    #+#             */
-/*   Updated: 2025/01/31 17:46:02 by plang            ###   ########.fr       */
+/*   Updated: 2025/02/03 16:47:09 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,11 @@ int	main(int argc, char **argv)
 	try
 	{
 		PmergeMe obj(argc, argv);
+		obj.sortFordJohnson();
 	}
 	catch(const std::exception& e)
 	{
+		std::cerr << e.what() << std::endl;
 		std::cerr << "Exiting after error occurred" << std::endl;
 	}
 	return 0;

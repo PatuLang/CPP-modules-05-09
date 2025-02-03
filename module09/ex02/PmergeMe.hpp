@@ -6,7 +6,7 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 12:11:35 by plang             #+#    #+#             */
-/*   Updated: 2025/01/31 17:50:06 by plang            ###   ########.fr       */
+/*   Updated: 2025/02/03 13:48:39 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <deque>
 # include <sstream>
 # include <limits.h>
+# include <algorithm>
 
 class PmergeMe
 {
@@ -34,6 +35,7 @@ class PmergeMe
 		PmergeMe(int argc,char **argv);
 		~PmergeMe();
 
+		void	sortFordJohnson();
 };
 
 #endif
