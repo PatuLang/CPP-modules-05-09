@@ -6,7 +6,7 @@
 #    By: plang <plang@student.hive.fi>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/22 12:00:13 by plang             #+#    #+#              #
-#    Updated: 2025/01/31 13:59:06 by plang            ###   ########.fr        #
+#    Updated: 2025/02/24 18:04:30 by plang            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = PmergeMe
 
 CXX = c++
 
-CXXFLAGS = -Werror -Wall -Wextra -g #-fsanitize=address
+CXXFLAGS = -Werror -Wall -Wextra -g -std=c++20 #-fsanitize=address
 
 SRCS = main.cpp PmergeMe.cpp
 

@@ -6,11 +6,15 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 12:11:32 by plang             #+#    #+#             */
-/*   Updated: 2025/02/03 17:11:50 by plang            ###   ########.fr       */
+/*   Updated: 2025/02/24 18:34:38 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PmergeMe.hpp"
+
+/*
+CONSTRUCTORS & DESTRUCTOR
+*/
 
 PmergeMe::PmergeMe()
 {
@@ -103,67 +107,104 @@ PmergeMe::~PmergeMe()
 {
 }
 
-void	PmergeMe::sortFordJohnson()
+/*
+GETTERS
+*/
+
+std::vector<int> &	PmergeMe::getVector()
 {
-	std::vector<int>					winner;
-	std::vector<int>					loser;
+	return m_vector;
+}
+
+std::vector<int>	PmergeMe::getSortedVector()
+{
+	return m_sortedVector;
+}
+
+std::deque<int> &	PmergeMe::getDeque()
+{
+	return m_deque;
+}
+
+std::deque<int>	PmergeMe::getSortedDeque()
+{
+	return m_sortedDeque;
+}
+
+/*
+SORTING FUNCTIONS
+*/
+
+void	PmergeMe::jacobsthalInsertionVector(std::vector<int> &losers, std::vector<int> &winners)
+{
+	std::vector<int>	jacobsthalSequence;
+
+	jacobsthalSequence.push_back(0);
+	jacobsthalSequence.push_back(1);
+	for (size_t i = 2; i <= winners.size(); i++)
+	{
+		size_t	sequenceNbr = jacobsthalSequence.at(i - 1) + 2 * jacobsthalSequence.at(i - 2);
+		if (sequenceNbr < winners.size())
+			jacobsthalSequence.push_back(sequenceNbr);
+	}
+	std::cout << "\njaqe\n\n";
+	for(auto &x : jacobsthalSequence)
+		std::cout << x << " ";
+	for (size_t i = 0; i < jacobsthalSequence.size() && i < winners.size(); i++)
+	{
+		// if ((size_t)jacobsthalSequence.at(i) >= winners.size())
+		// 	break ;
+		size_t	num = winners.at(jacobsthalSequence.at(i));
+		auto pos = std::lower_bound(losers.begin(), losers.end(), num); 
+		losers.insert(pos, num);
+	}
+	// for (size_t i = 0; i < winners.size(); i++)
+	// {
+	// 	if(std::find(losers.begin(), losers.end(), winners.at(i)) != losers.end())
+	// 		continue ;
+	// 	size_t	num = winners.at(i);
+	// 	auto pos = std::lower_bound(losers.begin(), losers.end(), num); 
+	// 	losers.insert(pos, num);
+	// }
+}
+
+void	PmergeMe::sortVector(std::vector<int> &vec)
+{
+	if (vec.size() == 1)
+		return ;
+
+	std::vector<int>					winners;
+	std::vector<int>					losers;
 	size_t	i = 0;
 
-	while (i < m_vector.size())
+	while (i + 1 < vec.size())
 	{
-		if (m_vector.at(i) < m_vector.at(i + 1))
+		if (vec.at(i) < vec.at(i + 1))
 		{
-			winner.push_back(m_vector.at(i));
-			loser.push_back(m_vector.at(i + 1));
+			winners.push_back(vec.at(i));
+			losers.push_back(vec.at(i + 1));
 		}
 		else
 		{
-			winner.push_back(m_vector.at(i + 1));
-			loser.push_back(m_vector.at(i));
+			winners.push_back(vec.at(i + 1));
+			losers.push_back(vec.at(i));
 		}
-		if (i + 3 == m_vector.size() && m_vector.size() % 2 != 0)
-		{
-			winner.push_back(m_vector.at(i + 2));
-			break ;
-		}
-		i++;
-		i++;
+		i += 2;
 	}
-	m_vector.clear();
+	if (vec.size() % 2 != 0)
+		losers.push_back(vec.at(vec.size() - 1));
 
-
+	sortVector(losers);
+	jacobsthalInsertionVector(losers, winners);
 
 	std::cout << "\nwinner\n\n";
-	for(auto &x : winner)
+	for(auto &x : winners)
 		std::cout << x << " ";
 	std::cout << std::endl;
 	std::cout << "\nloser\n\n";
-	for(auto &x : loser)
+	for(auto &x : losers)
 		std::cout << x << " ";
 	std::cout << std::endl;
 
-
-
-	while (!winner.empty())
-	{
-		auto minElement = std::min_element(winner.begin(), winner.end());
-		m_vector.push_back(*minElement);
-		winner.erase(minElement);
-	}
-	while (!loser.empty())
-	{
-		auto iter = loser.end();
-
-		winner.begin();
-		auto middle = winner.size() / 2;
-		winner.end();
-
-		loser.pop_back();
-	}
-	
-
-	std::cout << "\nVector\n\n";
-	for(auto &x : m_vector)
-		std::cout << x << " ";
-	std::cout << std::endl;
+	vec = losers;
 }

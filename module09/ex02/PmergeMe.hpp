@@ -6,7 +6,7 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 12:11:35 by plang             #+#    #+#             */
-/*   Updated: 2025/02/03 13:48:39 by plang            ###   ########.fr       */
+/*   Updated: 2025/02/24 18:29:13 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,15 @@
 # include <sstream>
 # include <limits.h>
 # include <algorithm>
+# include <cmath>
 
 class PmergeMe
 {
 	private:
 		std::vector<int>	m_vector;
+		std::vector<int>	m_sortedVector;
 		std::deque<int>		m_deque;
+		std::deque<int>		m_sortedDeque;
 
 		PmergeMe();
 		PmergeMe(const PmergeMe &);
@@ -35,7 +38,14 @@ class PmergeMe
 		PmergeMe(int argc,char **argv);
 		~PmergeMe();
 
-		void	sortFordJohnson();
+		std::vector<int> &	getVector();
+		std::vector<int>	getSortedVector();
+
+		std::deque<int>	&	getDeque();
+		std::deque<int>		getSortedDeque();
+
+		void	sortVector(std::vector<int> &);
+		void	jacobsthalInsertionVector(std::vector<int> &, std::vector<int> &);
 };
 
 #endif
