@@ -6,7 +6,7 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 12:11:32 by plang             #+#    #+#             */
-/*   Updated: 2025/02/24 18:34:38 by plang            ###   ########.fr       */
+/*   Updated: 2025/02/25 15:01:10 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ PmergeMe::PmergeMe()
 
 PmergeMe::PmergeMe(int argc, char **argv)
 {
+	auto parseStart = std::chrono::high_resolution_clock::now();
 	std::stringstream	argStream;
 
 	for (int i = 1; i != argc; i++)
@@ -76,20 +77,12 @@ PmergeMe::PmergeMe(int argc, char **argv)
 		m_vector.push_back(number);
 		m_deque.push_back(number);
 	}
-	std::string validOgInput = argStream.str();
-	std::cout << "Valid input: => " << validOgInput << std::endl;
-	std::cout << "\n\nPrinting containers\n\n";
-	std::cout << "\nVector\n\n";
-	for(auto &x : m_vector)
-		std::cout << x << " ";
-	std::cout << std::endl;
-	std::cout << "\nDeque\n\n";
-	for(auto &x : m_deque)
-		std::cout << x << " ";
-	std::cout << std::endl;
+	auto parseStop = std::chrono::high_resolution_clock::now();
+	m_parseTime = parseStop - parseStart;
 }
 
-PmergeMe::PmergeMe(const PmergeMe &other) : m_vector(other.m_vector), m_deque(other.m_deque)
+PmergeMe::PmergeMe(const PmergeMe &other) : m_vector(other.m_vector), m_deque(other.m_deque)\
+, m_vecStart(other.m_vecStart), m_vecStop(other.m_vecStop), m_deqStart(other.m_deqStart), m_deqStop(other.m_deqStop)
 {
 }
 
@@ -99,6 +92,10 @@ const PmergeMe&	PmergeMe::operator=(const PmergeMe &other)
 	{
 		m_vector = other.m_vector;
 		m_deque = other.m_deque;
+		m_vecStart = other.m_vecStart;
+		m_vecStop = other.m_vecStop;
+		m_deqStart = other.m_deqStart;
+		m_deqStop = other.m_deqStop;
 	}
 	return *this;
 }
@@ -116,95 +113,235 @@ std::vector<int> &	PmergeMe::getVector()
 	return m_vector;
 }
 
-std::vector<int>	PmergeMe::getSortedVector()
-{
-	return m_sortedVector;
-}
-
 std::deque<int> &	PmergeMe::getDeque()
 {
 	return m_deque;
 }
 
-std::deque<int>	PmergeMe::getSortedDeque()
+/*
+PRINTERS
+*/
+
+void	PmergeMe::vecPrint()
 {
-	return m_sortedDeque;
+	for(auto &x : m_vector)
+		std::cout << x << " ";
+	std::cout << std::endl;
+}
+
+void	PmergeMe::vecPrintTruncated()
+{
+	if (m_vector.size() > 30)
+	{
+		for (int i = 0; i < 10; i++)
+        	std::cout << m_vector.at(i) << " ";
+		std::cout << "[...]";
+		std::cout << std::endl;
+	}
+	else
+	{
+		for(auto &x : m_vector)
+			std::cout << x << " ";
+		std::cout << std::endl;
+	}
+}
+
+void	PmergeMe::deqPrint()
+{
+	for(auto &x : m_deque)
+		std::cout << x << " ";
+	std::cout << std::endl;
+}
+
+void	PmergeMe::deqPrintTruncated()
+{
+	if (m_deque.size() > 30)
+	{
+		for (int i = 0; i < 10; i++)
+        	std::cout << m_deque.at(i) << " ";
+		std::cout << "[...]";
+		std::cout << std::endl;
+	}
+	else
+	{
+		for(auto &x : m_deque)
+			std::cout << x << " ";
+		std::cout << std::endl;
+	}
 }
 
 /*
-SORTING FUNCTIONS
+TIME FUNCTIONS
 */
 
-void	PmergeMe::jacobsthalInsertionVector(std::vector<int> &losers, std::vector<int> &winners)
+void	PmergeMe::elapsedTimePrint()
+{
+	std::chrono::duration<double> vecElapsed = m_vecStop - m_vecStart;
+	std::chrono::duration<double> deqElapsed = m_deqStop - m_deqStart;
+
+	std::cout << "Time to process a range of " << m_vector.size() << " elements with std::vector<int> : " << std::fixed << std::setprecision(6) << m_parseTime.count() + vecElapsed.count() << " µs" << std::endl;
+	std::cout << "Time to process a range of " << m_deque.size() << " elements with std::deque<int> : " << std::fixed << std::setprecision(6) << m_parseTime.count() + deqElapsed.count() << " µs" << std::endl;
+}
+
+void	PmergeMe::startVec()
+{
+	m_vecStart = std::chrono::high_resolution_clock::now();
+}
+
+void	PmergeMe::startDeq()
+{
+	m_deqStart = std::chrono::high_resolution_clock::now();
+}
+
+/*
+SORTING FUNCTIONS : VECTOR
+*/
+
+void	PmergeMe::vecJacobsthalInsertion(std::vector<int> &main, std::vector<int> &pending)
 {
 	std::vector<int>	jacobsthalSequence;
 
 	jacobsthalSequence.push_back(0);
 	jacobsthalSequence.push_back(1);
-	for (size_t i = 2; i <= winners.size(); i++)
+	for (size_t i = 2; ; i++)
 	{
 		size_t	sequenceNbr = jacobsthalSequence.at(i - 1) + 2 * jacobsthalSequence.at(i - 2);
-		if (sequenceNbr < winners.size())
-			jacobsthalSequence.push_back(sequenceNbr);
+		if (sequenceNbr >= pending.size())
+			break ;
+		jacobsthalSequence.push_back(sequenceNbr);
 	}
-	std::cout << "\njaqe\n\n";
-	for(auto &x : jacobsthalSequence)
-		std::cout << x << " ";
-	for (size_t i = 0; i < jacobsthalSequence.size() && i < winners.size(); i++)
+	for (size_t i = 3; i < jacobsthalSequence.size() && i < pending.size(); i++)
 	{
-		// if ((size_t)jacobsthalSequence.at(i) >= winners.size())
-		// 	break ;
-		size_t	num = winners.at(jacobsthalSequence.at(i));
-		auto pos = std::lower_bound(losers.begin(), losers.end(), num); 
-		losers.insert(pos, num);
+		if ((size_t)jacobsthalSequence.at(i) >= pending.size())
+			break ;
+		size_t	num = pending.at(jacobsthalSequence.at(i));
+		auto pos = std::lower_bound(main.begin(), main.end(), num);
+		main.insert(pos, num);
 	}
-	// for (size_t i = 0; i < winners.size(); i++)
-	// {
-	// 	if(std::find(losers.begin(), losers.end(), winners.at(i)) != losers.end())
-	// 		continue ;
-	// 	size_t	num = winners.at(i);
-	// 	auto pos = std::lower_bound(losers.begin(), losers.end(), num); 
-	// 	losers.insert(pos, num);
-	// }
+	for (size_t i = 0; i < pending.size(); i++)
+	{
+		if(std::find(main.begin(), main.end(), pending.at(i)) != main.end())
+			continue ;
+		size_t	num = pending.at(i);
+		auto pos = std::lower_bound(main.begin(), main.end(), num); 
+		main.insert(pos, num);
+	}
 }
 
-void	PmergeMe::sortVector(std::vector<int> &vec)
+void	PmergeMe::vecSort(std::vector<int> &vec)
 {
 	if (vec.size() == 1)
 		return ;
 
-	std::vector<int>					winners;
-	std::vector<int>					losers;
+	std::vector<int>					pending;
+	std::vector<int>					main;
 	size_t	i = 0;
 
 	while (i + 1 < vec.size())
 	{
 		if (vec.at(i) < vec.at(i + 1))
 		{
-			winners.push_back(vec.at(i));
-			losers.push_back(vec.at(i + 1));
+			pending.push_back(vec.at(i));
+			main.push_back(vec.at(i + 1));
 		}
 		else
 		{
-			winners.push_back(vec.at(i + 1));
-			losers.push_back(vec.at(i));
+			pending.push_back(vec.at(i + 1));
+			main.push_back(vec.at(i));
 		}
 		i += 2;
 	}
 	if (vec.size() % 2 != 0)
-		losers.push_back(vec.at(vec.size() - 1));
+		main.push_back(vec.at(vec.size() - 1));
 
-	sortVector(losers);
-	jacobsthalInsertionVector(losers, winners);
+	vecSort(main);
+	vecJacobsthalInsertion(main, pending);
+	
+	vec = main;
+	m_vecStop = std::chrono::high_resolution_clock::now();
+}
 
-	std::cout << "\nwinner\n\n";
-	for(auto &x : winners)
-		std::cout << x << " ";
-	std::cout << std::endl;
-	std::cout << "\nloser\n\n";
-	for(auto &x : losers)
-		std::cout << x << " ";
-	std::cout << std::endl;
+/*
+SORTING FUNCTIONS : DEQUE
+*/
 
-	vec = losers;
+void	PmergeMe::deqJacobsthalInsertion(std::deque<int> &main, std::deque<int> &pending)
+{
+	std::deque<int>	jacobsthalSequence;
+
+	jacobsthalSequence.push_back(0);
+	jacobsthalSequence.push_back(1);
+	for (size_t i = 2; ; i++)
+	{
+		size_t	sequenceNbr = jacobsthalSequence.at(i - 1) + 2 * jacobsthalSequence.at(i - 2);
+		if (sequenceNbr >= pending.size())
+			break ;
+		jacobsthalSequence.push_back(sequenceNbr);
+	}
+	for (size_t i = 3; i < jacobsthalSequence.size() && i < pending.size(); i++)
+	{
+		if ((size_t)jacobsthalSequence.at(i) >= pending.size())
+			break ;
+		size_t	num = pending.at(jacobsthalSequence.at(i));
+		auto pos = std::lower_bound(main.begin(), main.end(), num);
+		main.insert(pos, num);
+	}
+	for (size_t i = 0; i < pending.size(); i++)
+	{
+		if(std::find(main.begin(), main.end(), pending.at(i)) != main.end())
+			continue ;
+		size_t	num = pending.at(i);
+		auto pos = std::lower_bound(main.begin(), main.end(), num); 
+		main.insert(pos, num);
+	}
+}
+
+void	PmergeMe::deqSort(std::deque<int> &deq)
+{
+	if (deq.size() == 1)
+		return ;
+
+	std::deque<int>					pending;
+	std::deque<int>					main;
+	size_t	i = 0;
+
+	while (i + 1 < deq.size())
+	{
+		if (deq.at(i) < deq.at(i + 1))
+		{
+			pending.push_back(deq.at(i));
+			main.push_back(deq.at(i + 1));
+		}
+		else
+		{
+			pending.push_back(deq.at(i + 1));
+			main.push_back(deq.at(i));
+		}
+		i += 2;
+	}
+	if (deq.size() % 2 != 0)
+		main.push_back(deq.at(deq.size() - 1));
+
+	deqSort(main);
+	deqJacobsthalInsertion(main, pending);
+	
+	deq = main;
+	m_deqStop = std::chrono::high_resolution_clock::now();
+}
+
+void	PmergeMe::isItSorted()
+{
+	if (std::is_sorted(m_vector.begin(), m_vector.end()))
+	{
+		std::cout << "The vector is sorted!" << std::endl;
+	}
+	else
+		std::cout << "The vector is NOT sorted!" << std::endl;
+		
+	if (std::is_sorted(m_vector.begin(), m_vector.end()))
+	{
+		std::cout << "The deque is sorted!" << std::endl;
+	}
+	else
+		std::cout << "The deque is NOT sorted!" << std::endl;
 }

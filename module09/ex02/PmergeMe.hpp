@@ -6,7 +6,7 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 12:11:35 by plang             #+#    #+#             */
-/*   Updated: 2025/02/24 18:29:13 by plang            ###   ########.fr       */
+/*   Updated: 2025/02/25 14:56:36 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,26 @@
 # define PMERGEME_HPP
 
 # include <iostream>
+# include <iomanip>
 # include <chrono>
 # include <vector>
 # include <deque>
 # include <sstream>
 # include <limits.h>
 # include <algorithm>
-# include <cmath>
 
 class PmergeMe
 {
 	private:
 		std::vector<int>	m_vector;
-		std::vector<int>	m_sortedVector;
 		std::deque<int>		m_deque;
-		std::deque<int>		m_sortedDeque;
+
+		std::chrono::duration<double>	m_parseTime;
+		
+		std::chrono::time_point<std::chrono::high_resolution_clock>	m_vecStart;
+		std::chrono::time_point<std::chrono::high_resolution_clock>	m_vecStop;
+		std::chrono::time_point<std::chrono::high_resolution_clock>	m_deqStart;
+		std::chrono::time_point<std::chrono::high_resolution_clock>	m_deqStop;
 
 		PmergeMe();
 		PmergeMe(const PmergeMe &);
@@ -39,13 +44,24 @@ class PmergeMe
 		~PmergeMe();
 
 		std::vector<int> &	getVector();
-		std::vector<int>	getSortedVector();
-
 		std::deque<int>	&	getDeque();
-		std::deque<int>		getSortedDeque();
 
-		void	sortVector(std::vector<int> &);
-		void	jacobsthalInsertionVector(std::vector<int> &, std::vector<int> &);
+		void	vecSort(std::vector<int> &);
+		void	vecJacobsthalInsertion(std::vector<int> &, std::vector<int> &);
+
+		void	deqSort(std::deque<int> &);
+		void	deqJacobsthalInsertion(std::deque<int> &, std::deque<int> &);
+
+		void	vecPrint();
+		void	deqPrint();
+		void	vecPrintTruncated();
+		void	deqPrintTruncated();
+
+		void	elapsedTimePrint();
+		void	startVec();
+		void	startDeq();
+
+		void	isItSorted();
 };
 
 #endif

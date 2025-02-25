@@ -6,7 +6,7 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 12:11:29 by plang             #+#    #+#             */
-/*   Updated: 2025/02/24 18:15:09 by plang            ###   ########.fr       */
+/*   Updated: 2025/02/25 15:01:34 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,40 @@ int	main(int argc, char **argv)
 	try
 	{
 		PmergeMe obj(argc, argv);
-		obj.sortVector(obj.getVector());
+		obj.isItSorted();
+
+		/* VECTOR */
+		obj.startVec();
+
+		std::cout << "Before: ";
+		obj.vecPrintTruncated();
+		// obj.vecPrint();
+		
+		obj.vecSort(obj.getVector());
+
+		std::cout << "After: ";
+		obj.vecPrintTruncated();
+		// obj.vecPrint();
+
+
+		/* DEQUE */
+
+		obj.startDeq();
+
+		std::cout << "Before: ";
+		obj.deqPrintTruncated();
+		// obj.deqPrint();
+		
+		obj.deqSort(obj.getDeque());
+		
+		std::cout << "After: ";
+		obj.deqPrintTruncated();
+		// obj.deqPrint();
+
+		/* RESULT */
+
+		obj.elapsedTimePrint();
+		obj.isItSorted();
 	}
 	catch(const std::exception& e)
 	{
