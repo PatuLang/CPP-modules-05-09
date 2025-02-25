@@ -1,21 +1,10 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   RPN.hpp                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/22 12:11:26 by plang             #+#    #+#             */
-/*   Updated: 2025/01/29 16:36:13 by plang            ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
-#ifndef RPN_HPP
-# define RPN_HPP
+#ifndef RP_HPP
+# define RP_HPP
 
 # include <iostream>
 # include <sstream>
-# include <deque>
+# include <stack>
 # include <string>
 # include <limits.h>
 
@@ -30,7 +19,7 @@ enum operators
 class RPN
 {
 	private:
-		std::deque<std::string>	m_input;
+		std::stack<std::string>	m_input;
 		std::string				validChars = "0123456789";
 		std::string				validOps = "+-*/";
 		
@@ -42,7 +31,7 @@ class RPN
 		RPN(char *argv);
 		~RPN();
 
-		std::deque<std::string>	splitRPN(std::string);
+		std::stack<std::string>	splitRPN(std::string);
 		void					checkInput();
 		int						checkOverflow(int, int, operators);
 		void					calculateInput(std::string);
