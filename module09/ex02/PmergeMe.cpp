@@ -6,7 +6,7 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 12:11:32 by plang             #+#    #+#             */
-/*   Updated: 2025/02/25 15:01:10 by plang            ###   ########.fr       */
+/*   Updated: 2025/02/26 11:07:41 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,12 +183,12 @@ void	PmergeMe::elapsedTimePrint()
 	std::cout << "Time to process a range of " << m_deque.size() << " elements with std::deque<int> : " << std::fixed << std::setprecision(6) << m_parseTime.count() + deqElapsed.count() << " µs" << std::endl;
 }
 
-void	PmergeMe::startVec()
+void	PmergeMe::startVecTime()
 {
 	m_vecStart = std::chrono::high_resolution_clock::now();
 }
 
-void	PmergeMe::startDeq()
+void	PmergeMe::startDeqTime()
 {
 	m_deqStart = std::chrono::high_resolution_clock::now();
 }

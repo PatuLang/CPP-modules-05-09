@@ -6,7 +6,7 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 12:11:35 by plang             #+#    #+#             */
-/*   Updated: 2025/02/25 14:56:36 by plang            ###   ########.fr       */
+/*   Updated: 2025/02/26 11:07:17 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@ class PmergeMe
 		void	deqPrintTruncated();
 
 		void	elapsedTimePrint();
-		void	startVec();
-		void	startDeq();
+		void	startVecTime();
+		void	startDeqTime();
 
 		void	isItSorted();
 };
