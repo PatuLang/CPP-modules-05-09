@@ -6,7 +6,7 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 12:11:29 by plang             #+#    #+#             */
-/*   Updated: 2025/02/25 15:01:34 by plang            ###   ########.fr       */
+/*   Updated: 2025/02/26 11:10:30 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	main(int argc, char **argv)
 		obj.isItSorted();
 
 		/* VECTOR */
-		obj.startVec();
+		obj.startVecTime();
 
 		std::cout << "Before: ";
 		obj.vecPrintTruncated();
@@ -40,7 +40,7 @@ int	main(int argc, char **argv)
 
 		/* DEQUE */
 
-		obj.startDeq();
+		obj.startDeqTime();
 
 		std::cout << "Before: ";
 		obj.deqPrintTruncated();
