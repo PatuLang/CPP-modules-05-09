@@ -6,7 +6,7 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 12:11:32 by plang             #+#    #+#             */
-/*   Updated: 2025/02/26 11:07:41 by plang            ###   ########.fr       */
+/*   Updated: 2025/02/28 19:18:12 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ PmergeMe::PmergeMe(int argc, char **argv)
 	
 	while (getline(argStream, token, delim))
 	{
+		if (token.empty())
+			continue ;
 		for (std::string::iterator i = token.begin(); i < token.end(); i++)
 		{
 			if (*i == '-' && *i - 1 != ' ')
@@ -174,15 +176,6 @@ void	PmergeMe::deqPrintTruncated()
 TIME FUNCTIONS
 */
 
-void	PmergeMe::elapsedTimePrint()
-{
-	std::chrono::duration<double> vecElapsed = m_vecStop - m_vecStart;
-	std::chrono::duration<double> deqElapsed = m_deqStop - m_deqStart;
-
-	std::cout << "Time to process a range of " << m_vector.size() << " elements with std::vector<int> : " << std::fixed << std::setprecision(6) << m_parseTime.count() + vecElapsed.count() << " µs" << std::endl;
-	std::cout << "Time to process a range of " << m_deque.size() << " elements with std::deque<int> : " << std::fixed << std::setprecision(6) << m_parseTime.count() + deqElapsed.count() << " µs" << std::endl;
-}
-
 void	PmergeMe::startVecTime()
 {
 	m_vecStart = std::chrono::high_resolution_clock::now();
@@ -197,6 +190,24 @@ void	PmergeMe::startDeqTime()
 SORTING FUNCTIONS : VECTOR
 */
 
+void	PmergeMe::theVector()
+{
+	startVecTime();
+
+	std::cout << "Before: ";
+	vecPrintTruncated();
+	// vecPrint();
+	
+	vecSort(getVector());
+
+	std::cout << "After: ";
+	vecPrintTruncated();
+	// vecPrint();
+
+	std::chrono::duration<double> vecElapsed = m_vecStop - m_vecStart;
+	std::cout << "Time to process a range of " << m_vector.size() << " elements with std::vector<int> : " << std::fixed << std::setprecision(6) << m_parseTime.count() + vecElapsed.count() << " µs" << std::endl;
+}
+
 void	PmergeMe::vecJacobsthalInsertion(std::vector<int> &main, std::vector<int> &pending)
 {
 	std::vector<int>	jacobsthalSequence;
@@ -210,7 +221,7 @@ void	PmergeMe::vecJacobsthalInsertion(std::vector<int> &main, std::vector<int> &
 			break ;
 		jacobsthalSequence.push_back(sequenceNbr);
 	}
-	for (size_t i = 3; i < jacobsthalSequence.size() && i < pending.size(); i++)
+	for (size_t i = 2; i < jacobsthalSequence.size() && i < pending.size(); i++)
 	{
 		if ((size_t)jacobsthalSequence.at(i) >= pending.size())
 			break ;
@@ -230,6 +241,8 @@ void	PmergeMe::vecJacobsthalInsertion(std::vector<int> &main, std::vector<int> &
 
 void	PmergeMe::vecSort(std::vector<int> &vec)
 {
+	if (vec.empty())
+		throw std::runtime_error("Error: Container is empty");
 	if (vec.size() == 1)
 		return ;
 
@@ -265,6 +278,24 @@ void	PmergeMe::vecSort(std::vector<int> &vec)
 SORTING FUNCTIONS : DEQUE
 */
 
+void	PmergeMe::theDeque()
+{
+	startDeqTime();
+
+	std::cout << "Before: ";
+	deqPrintTruncated();
+	// deqPrint();
+	
+	deqSort(getDeque());
+	
+	std::cout << "After: ";
+	deqPrintTruncated();
+	// deqPrint();
+
+	std::chrono::duration<double> deqElapsed = m_deqStop - m_deqStart;
+	std::cout << "Time to process a range of " << m_deque.size() << " elements with std::deque<int> : " << std::fixed << std::setprecision(6) << m_parseTime.count() + deqElapsed.count() << " µs" << std::endl;
+}
+
 void	PmergeMe::deqJacobsthalInsertion(std::deque<int> &main, std::deque<int> &pending)
 {
 	std::deque<int>	jacobsthalSequence;
@@ -278,7 +309,7 @@ void	PmergeMe::deqJacobsthalInsertion(std::deque<int> &main, std::deque<int> &pe
 			break ;
 		jacobsthalSequence.push_back(sequenceNbr);
 	}
-	for (size_t i = 3; i < jacobsthalSequence.size() && i < pending.size(); i++)
+	for (size_t i = 2; i < jacobsthalSequence.size() && i < pending.size(); i++)
 	{
 		if ((size_t)jacobsthalSequence.at(i) >= pending.size())
 			break ;

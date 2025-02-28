@@ -6,7 +6,7 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 12:11:11 by plang             #+#    #+#             */
-/*   Updated: 2025/02/26 11:15:30 by plang            ###   ########.fr       */
+/*   Updated: 2025/02/28 18:34:14 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ void	BitcoinExchange::readInput(const std::string inputFile)
 	std::string	timeStamp;
 	std::string	value;
 	std::regex	regexTimeStamp(R"(^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2]\d|3[0-1])$)");
+	std::regex	regexValue(R"(^[0-9]+(\.[0-9]+)?$)");
 	double		doubleValue;
 	while (getline(file, line))
 	{
@@ -85,7 +86,12 @@ void	BitcoinExchange::readInput(const std::string inputFile)
 			continue ;
 		}
 		timeStamp = line.substr(0, delim - 1);
-		value = line.substr(delim + 1, line.size());
+		value = line.substr(delim + 2, line.size());
+		if (std::regex_match(value, regexValue) == false)
+		{
+			std::cerr << "Error: bad input => " << value << std::endl;
+			continue ;
+		}
 		try
 		{
 			doubleValue = std::stod(value);
@@ -93,6 +99,7 @@ void	BitcoinExchange::readInput(const std::string inputFile)
 		catch(const std::exception& e)
 		{
 			std::cerr << "Error: bad input => " << line << '\n';
+			continue ;
 		}
 		if (std::regex_match(timeStamp, regexTimeStamp) == false)
 		{
@@ -168,7 +175,7 @@ void	BitcoinExchange::calculateExchangeRate(const std::string inputTimestamp, co
 		}
 		else
 		{
-			result = m_dataBase.upper_bound(closestMatch)->second * value;
+			result = m_dataBase.lower_bound(closestMatch)->second * value;
 			std::cout << std::fixed << std::setprecision(1) << "(" << m_dataBase.lower_bound(closestMatch)->first << ")-> " << inputTimestamp << " => " << value << " = " << result << std::endl;
 		}
 	}

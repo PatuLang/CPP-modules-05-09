@@ -6,7 +6,7 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 12:11:35 by plang             #+#    #+#             */
-/*   Updated: 2025/02/26 11:07:17 by plang            ###   ########.fr       */
+/*   Updated: 2025/02/28 19:22:14 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,20 +46,19 @@ class PmergeMe
 		std::vector<int> &	getVector();
 		std::deque<int>	&	getDeque();
 
+		void	theVector();
+		void	startVecTime();
 		void	vecSort(std::vector<int> &);
 		void	vecJacobsthalInsertion(std::vector<int> &, std::vector<int> &);
+		void	vecPrintTruncated();
+		void	vecPrint();
 
+		void	theDeque();
+		void	startDeqTime();
 		void	deqSort(std::deque<int> &);
 		void	deqJacobsthalInsertion(std::deque<int> &, std::deque<int> &);
-
-		void	vecPrint();
-		void	deqPrint();
-		void	vecPrintTruncated();
 		void	deqPrintTruncated();
-
-		void	elapsedTimePrint();
-		void	startVecTime();
-		void	startDeqTime();
+		void	deqPrint();
 
 		void	isItSorted();
 };

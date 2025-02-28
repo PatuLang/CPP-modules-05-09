@@ -145,6 +145,9 @@ void	RPN::checkInput()
 	int numbers = 0;
 	int operations = 0;
 
+	if (m_input.empty())
+		throw std::runtime_error("Error: No valid input");
+
 	if (validOps.contains(m_input.top()) == false)
 		throw std::runtime_error("Error: last character is not an operator");
 
