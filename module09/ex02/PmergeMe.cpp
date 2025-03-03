@@ -6,7 +6,7 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 12:11:32 by plang             #+#    #+#             */
-/*   Updated: 2025/02/28 19:18:12 by plang            ###   ########.fr       */
+/*   Updated: 2025/03/03 15:13:21 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -369,7 +369,7 @@ void	PmergeMe::isItSorted()
 	else
 		std::cout << "The vector is NOT sorted!" << std::endl;
 		
-	if (std::is_sorted(m_vector.begin(), m_vector.end()))
+	if (std::is_sorted(m_deque.begin(), m_deque.end()))
 	{
 		std::cout << "The deque is sorted!" << std::endl;
 	}
